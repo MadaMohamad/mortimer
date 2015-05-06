@@ -1,0 +1,35 @@
+<?php
+// Text
+$_['text_backup']                      = 'Backup / Restore';
+$_['text_banner']                      = 'Banners';
+$_['text_front']                       = 'Front';
+$_['text_category']                    = 'Categories';
+$_['text_customer']                    = 'Customers';
+$_['text_customer_ban_ip']             = 'Banned IP';
+$_['text_dashboard']                   = 'Dashboard';
+$_['text_design']                      = 'Design';
+$_['text_error_log']                   = 'Error Logs';
+$_['text_extension']                   = 'Extensions';
+$_['text_feed']                        = 'Feeds';
+$_['text_filter']                      = 'Filters';
+$_['text_information']                 = 'Information';
+$_['text_installer']                   = 'Extension Installer';
+$_['text_language']                    = 'Languages';
+$_['text_layout']                      = 'Layouts';
+$_['text_contact']                     = 'Mail';
+$_['text_marketing']                   = 'Marketing';
+$_['text_modification']                = 'Modifications';
+$_['text_module']                      = 'Modules';
+$_['text_post']                        = 'Posts';
+$_['text_reports']                     = 'Reports';
+$_['text_report_post_viewed']          = 'Viewed';
+$_['text_report_customer_activity']    = 'Customer Activity';
+$_['text_report_customer_online']      = 'Customers Online';
+$_['text_review']                      = 'Reviews';
+$_['text_setting']                     = 'Settings';
+$_['text_system']                      = 'System';
+$_['text_tools']                       = 'Tools';
+$_['text_upload']                      = 'Uploads';
+$_['text_user']                        = 'Users';
+$_['text_users']                       = 'Users';
+$_['text_user_group']                  = 'User Groups';
