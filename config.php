@@ -1,6 +1,6 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/mada/');
+define('HTTP_SERVER', 'http://localhost:8888/mada/');
 
 // HTTPS
 define('HTTPS_SERVER', 'http://localhost:8888/mada/');
