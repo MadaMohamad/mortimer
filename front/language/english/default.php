@@ -13,6 +13,8 @@ $_['text_pagination']       = 'Showing %d to %d of %d (%d Pages)';
 $_['text_loading']          = 'Loading...';
 $_['text_author']           = 'Published by:';
 $_['text_on']               = 'on';
+$_['text_category']         = 'Categories';
+$_['text_posts']            = 'Posts';
 
 // Buttons
 $_['button_back']           = 'Back';

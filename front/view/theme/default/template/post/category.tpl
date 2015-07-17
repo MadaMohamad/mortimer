@@ -53,6 +53,10 @@
       <?php } ?>
       <?php } ?>
       <?php if ($posts) { ?>
+<<<<<<< HEAD
+=======
+      <p><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></p>
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
       <div class="row">
         <div class="col-md-4">
           <div class="btn-group hidden-xs">
@@ -99,8 +103,23 @@
               <div class="caption">
                 <h4><a href="<?php echo $post['href']; ?>"><?php echo $post['name']; ?></a></h4>
                 <p><?php echo $post['description']; ?></p>
+<<<<<<< HEAD
                 <p><i><?php echo $text_author;?> <a href="<?php echo $post['uhref']; ?>"><?php echo $post['user']; ?></a> <?php echo $text_on . ' ' . $post['date_added']; ?></i></p>               
+=======
+                <?php if ($post['rating']) { ?>
+                <div class="rating">
+                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+                  <?php if ($post['rating'] < $i) { ?>
+                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                  <?php } else { ?>
+                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                  <?php } ?>
+                  <?php } ?>
+                </div>
+                <?php } ?>
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
               </div>
+
             </div>
           </div>
         </div>

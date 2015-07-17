@@ -121,6 +121,10 @@ class ControllerPostCategory extends Controller {
 			}
 
 			$data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
+<<<<<<< HEAD
+=======
+			$data['compare'] = $this->url->link('post/compare');
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
 
 			$url = '';
 
@@ -178,15 +182,32 @@ class ControllerPostCategory extends Controller {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_post_width'), $this->config->get('config_image_post_height'));
 				}
 
+<<<<<<< HEAD
+=======
+				if ($this->config->get('config_review_status')) {
+					$rating = (int)$result['rating'];
+				} else {
+					$rating = false;
+				}
+
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
 				$data['posts'][] = array(
 					'post_id'  => $result['post_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_post_description_length')) . '..',
+<<<<<<< HEAD
 					'href'        => $this->url->link('post/post', 'path=' . $this->request->get['path'] . '&post_id=' . $result['post_id'] . $url),
 					'user'        => $result['user'],
 					'uhref'       => $this->url->link('post/author', 'author_id=' . $result['user_id']),
 					'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+=======
+					'price'       => $price,
+					'special'     => $special,
+					'tax'         => $tax,
+					'rating'      => $result['rating'],
+					'href'        => $this->url->link('post/post', 'path=' . $this->request->get['path'] . '&post_id=' . $result['post_id'] . $url)
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
 				);
 			}
 
@@ -218,6 +239,47 @@ class ControllerPostCategory extends Controller {
 				'text'  => $this->language->get('text_name_desc'),
 				'value' => 'pd.name-DESC',
 				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
+<<<<<<< HEAD
+=======
+			);
+
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_price_asc'),
+				'value' => 'p.price-ASC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)
+			);
+
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_price_desc'),
+				'value' => 'p.price-DESC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
+			);
+
+			if ($this->config->get('config_review_status')) {
+				$data['sorts'][] = array(
+					'text'  => $this->language->get('text_rating_desc'),
+					'value' => 'rating-DESC',
+					'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
+				);
+
+				$data['sorts'][] = array(
+					'text'  => $this->language->get('text_rating_asc'),
+					'value' => 'rating-ASC',
+					'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
+				);
+			}
+
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_model_asc'),
+				'value' => 'p.model-ASC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
+			);
+
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_model_desc'),
+				'value' => 'p.model-DESC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
 			);
 
 			$url = '';

@@ -76,6 +76,7 @@ class ControllerInformationContact extends Controller {
 
 		$data['action'] = $this->url->link('information/contact');
 
+<<<<<<< HEAD
 		$this->load->model('tool/image');
 
 		if ($this->config->get('config_image')) {
@@ -88,6 +89,8 @@ class ControllerInformationContact extends Controller {
 		$data['telephone'] = $this->config->get('config_telephone');
 		$data['fax'] = $this->config->get('config_fax');
 		$data['about'] = $this->config->get('config_about');
+=======
+>>>>>>> 7f8950f0bd1d4f9d34f70693e70cff35cbfadaa0
 
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
