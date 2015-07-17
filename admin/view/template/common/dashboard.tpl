@@ -28,7 +28,6 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-12 col-sm-12 col-sx-12"><?php echo $activity; ?></div>
-      <div class="col-lg-8 col-md-12 col-sm-12 col-sx-12"> <?php echo $recent; ?> </div>
     </div>
   </div>
 </div>

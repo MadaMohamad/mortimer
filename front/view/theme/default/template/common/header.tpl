@@ -51,43 +51,55 @@
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
-<div id="search" class="input-group">
-  <input type="text" name="search" value="" placeholder="Search" class="input-lg">
-  <span class="input-group-btn">
-    <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
-  </span>
-</div>
 
 <!-- =========================
      HEADER   
 ============================== -->
+		
+		
+<div class="menu">
+		
 		<!-- STICKY NAVIGATION -->
-		<div class="navbar-inverse menu">
+		<div class="navbar navbar-inverse bs-docs-nav navigation">
 			<div class="container">
 				<div class="navbar-header">
 					
 					<!-- LOGO ON STICKY NAV BAR -->
-					<a class="navbar-brand" href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" alt=""></a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#"><img src="<?php echo $logo; ?>" alt=""></a>
 					
 				</div>
+				
 				<!-- NAVIGATION LINKS -->
-				<div class="navbar-collapse collapse" id="landx-navigation">
+				<div class="navbar-collapse collapse" id="navigation">
 					<ul class="nav navbar-nav navbar-right main-navigation">
-						<li><a href="#home">Home</a></li>
+						<li><a href="<?php echo $home; ?>">Home</a></li>
 						 <?php foreach ($categories as $category) { ?>
 						 <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
 						 <?php } ?>
 
-						<li><a href="#section8">Contact</a></li>
-						<li></li>
+						<li><a href="<?php echo $contact; ?>">Contact</a></li>
 					</ul>
 				</div>
+				<div id="search" class="input-group">
+						<input type="text" name="search" value="" placeholder="Search" class="input-lg">
+						<span class="input-group-btn">
+							<button type="button" class="btn-lg"><i class="fa fa-search"></i></button>
+						</span>
+					</div>
 				
 			</div>
 			<!-- /END CONTAINER -->
 			
 		</div>
 		
+
+</div>				
 <script>
 /* =================================
    LOADER                     

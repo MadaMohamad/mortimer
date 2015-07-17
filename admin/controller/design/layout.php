@@ -417,9 +417,9 @@ class ControllerDesignLayout extends Controller {
 		}
 
 		$this->load->model('setting/store');
-		$this->load->model('catalog/product');
-		$this->load->model('catalog/category');
-		$this->load->model('catalog/information');
+		$this->load->model('front/post');
+		$this->load->model('front/category');
+		$this->load->model('front/information');
 
 		foreach ($this->request->post['selected'] as $layout_id) {
 			if ($this->config->get('config_layout_id') == $layout_id) {
@@ -432,19 +432,19 @@ class ControllerDesignLayout extends Controller {
 				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
 			}
 
-			$product_total = $this->model_catalog_product->getTotalProductsByLayoutId($layout_id);
+			$post_total = $this->model_front_post->getTotalpostsByLayoutId($layout_id);
 
-			if ($product_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_product'), $product_total);
+			if ($post_total) {
+				$this->error['warning'] = sprintf($this->language->get('error_post'), $post_total);
 			}
 
-			$category_total = $this->model_catalog_category->getTotalCategoriesByLayoutId($layout_id);
+			$category_total = $this->model_front_category->getTotalCategoriesByLayoutId($layout_id);
 
 			if ($category_total) {
 				$this->error['warning'] = sprintf($this->language->get('error_category'), $category_total);
 			}
 
-			$information_total = $this->model_catalog_information->getTotalInformationsByLayoutId($layout_id);
+			$information_total = $this->model_front_information->getTotalInformationsByLayoutId($layout_id);
 
 			if ($information_total) {
 				$this->error['warning'] = sprintf($this->language->get('error_information'), $information_total);

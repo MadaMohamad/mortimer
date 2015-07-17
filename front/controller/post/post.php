@@ -191,15 +191,7 @@ class ControllerPostPost extends Controller {
 			$data['text_tags'] = $this->language->get('text_tags');
 			$data['text_related'] = $this->language->get('text_related');
 
-			$data['entry_name'] = $this->language->get('entry_name');
-			$data['entry_comment'] = $this->language->get('entry_comment');
-			$data['entry_good'] = $this->language->get('entry_good');
-			$data['entry_bad'] = $this->language->get('entry_bad');
-			$data['entry_captcha'] = $this->language->get('entry_captcha');
-
 			$data['button_continue'] = $this->language->get('button_continue');
-
-			$this->load->model('front/review');
 
 			$data['tab_description'] = $this->language->get('tab_description');
 
@@ -348,85 +340,4 @@ class ControllerPostPost extends Controller {
 		}
 	}
 
-	public function review() {
-		$this->load->language('post/post');
-
-		$this->load->model('front/review');
-
-		$data['text_no_reviews'] = $this->language->get('text_no_reviews');
-
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
-		$data['reviews'] = array();
-
-		$review_total = $this->model_front_review->getTotalReviewsBypostId($this->request->get['post_id']);
-
-		$results = $this->model_front_review->getReviewsBypostId($this->request->get['post_id'], ($page - 1) * 5, 5);
-
-		foreach ($results as $result) {
-			$data['reviews'][] = array(
-				'author'     => $result['author'],
-				'text'       => nl2br($result['text']),
-				'rating'     => (int)$result['rating'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-			);
-		}
-
-		$pagination = new Pagination();
-		$pagination->total = $review_total;
-		$pagination->page = $page;
-		$pagination->limit = 5;
-		$pagination->url = $this->url->link('post/post/review', 'post_id=' . $this->request->get['post_id'] . '&page={page}');
-
-		$data['pagination'] = $pagination->render();
-
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
-
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/review.tpl')) {
-			$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/post/review.tpl', $data));
-		} else {
-			$this->response->setOutput($this->load->view('default/template/post/review.tpl', $data));
-		}
-	}
-
-	public function write() {
-		$this->load->language('post/post');
-
-		$json = array();
-
-		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
-			if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
-				$json['error'] = $this->language->get('error_name');
-			}
-
-			if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
-				$json['error'] = $this->language->get('error_text');
-			}
-
-			if (empty($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
-				$json['error'] = $this->language->get('error_rating');
-			}
-
-			if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
-				$json['error'] = $this->language->get('error_captcha');
-			}
-
-			unset($this->session->data['captcha']);
-
-			if (!isset($json['error'])) {
-				$this->load->model('front/review');
-
-				$this->model_front_review->addReview($this->request->get['post_id'], $this->request->post);
-
-				$json['success'] = $this->language->get('text_success');
-			}
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
 }

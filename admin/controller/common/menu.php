@@ -44,14 +44,12 @@ class ControllerCommonMenu extends Controller {
 		$data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
 		$data['category'] = $this->url->link('front/category', 'token=' . $this->session->data['token'], 'SSL');
 		$data['contact'] = $this->url->link('marketing/contact', 'token=' . $this->session->data['token'], 'SSL');
-		$data['customer'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'], 'SSL');
-		$data['customer_ban_ip'] = $this->url->link('sale/customer_ban_ip', 'token=' . $this->session->data['token'], 'SSL');
 		$data['error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'], 'SSL');
 		$data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');
 		$data['filter'] = $this->url->link('front/filter', 'token=' . $this->session->data['token'], 'SSL');
 		$data['information'] = $this->url->link('front/information', 'token=' . $this->session->data['token'], 'SSL');
 		$data['installer'] = $this->url->link('extension/installer', 'token=' . $this->session->data['token'], 'SSL');
-		$data['language'] = $this->url->link('localisation/language', 'token=' . $this->session->data['token'], 'SSL');
+		$data['language'] = $this->url->link('languageisation/language', 'token=' . $this->session->data['token'], 'SSL');
 		$data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
 		$data['modification'] = $this->url->link('extension/modification', 'token=' . $this->session->data['token'], 'SSL');
 		$data['marketing'] = $this->url->link('marketing/marketing', 'token=' . $this->session->data['token'], 'SSL');
@@ -59,8 +57,7 @@ class ControllerCommonMenu extends Controller {
 		$data['post'] = $this->url->link('front/post', 'token=' . $this->session->data['token'], 'SSL');
 		$data['report_post_viewed'] = $this->url->link('report/post_viewed', 'token=' . $this->session->data['token'], 'SSL');
 		$data['report_customer_online'] = $this->url->link('report/customer_online', 'token=' . $this->session->data['token'], 'SSL');
-		$data['review'] = $this->url->link('front/review', 'token=' . $this->session->data['token'], 'SSL');
-		$data['setting'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		$data['setting'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		$data['upload'] = $this->url->link('tool/upload', 'token=' . $this->session->data['token'], 'SSL');
 		$data['user'] = $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL');
 		$data['user_group'] = $this->url->link('user/user_permission', 'token=' . $this->session->data['token'], 'SSL');

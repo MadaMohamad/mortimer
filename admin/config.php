@@ -19,7 +19,7 @@ define('DIR_DOWNLOAD', '/Applications/MAMP/htdocs/mada/system/download/');
 define('DIR_UPLOAD', '/Applications/MAMP/htdocs/mada/system/upload/');
 define('DIR_LOGS', '/Applications/MAMP/htdocs/mada/system/logs/');
 define('DIR_MODIFICATION', '/Applications/MAMP/htdocs/mada/system/modification/');
-define('DIR_front', '/Applications/MAMP/htdocs/mada/front/');
+define('DIR_FRONT', '/Applications/MAMP/htdocs/mada/front/');
 
 // DB
 define('DB_DRIVER', 'mysqli');

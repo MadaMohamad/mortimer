@@ -288,6 +288,8 @@ class ControllerFrontCategory extends Controller {
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_blog'] = $this->language->get('text_blog');
+		$data['text_gallery'] = $this->language->get('text_gallery');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
@@ -299,6 +301,7 @@ class ControllerFrontCategory extends Controller {
 		$data['entry_filter'] = $this->language->get('entry_filter');
 		$data['entry_image'] = $this->language->get('entry_image');
 		$data['entry_top'] = $this->language->get('entry_top');
+		$data['entry_display'] = $this->language->get('entry_display');
 		$data['entry_column'] = $this->language->get('entry_column');
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$data['entry_status'] = $this->language->get('entry_status');
@@ -307,6 +310,7 @@ class ControllerFrontCategory extends Controller {
 		$data['help_filter'] = $this->language->get('help_filter');
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_top'] = $this->language->get('help_top');
+		$data['help_display'] = $this->language->get('help_display');
 		$data['help_column'] = $this->language->get('help_column');
 
 		$data['button_save'] = $this->language->get('button_save');
@@ -465,6 +469,12 @@ class ControllerFrontCategory extends Controller {
 			$data['top'] = $category_info['top'];
 		} else {
 			$data['top'] = 0;
+		}
+		
+		if (isset($this->request->post['display'])) {
+			$data['display'] = $this->request->post['display'];
+		} else {
+			$data['display'] = $this->config->get('display');
 		}
 
 		if (isset($this->request->post['column'])) {

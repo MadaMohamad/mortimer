@@ -23,9 +23,7 @@ class ControllerCommonHeader extends Controller {
 
 		$data['text_customer'] = $this->language->get('text_customer');
 		$data['text_online'] = $this->language->get('text_online');
-		$data['text_approval'] = $this->language->get('text_approval');
 		$data['text_post'] = $this->language->get('text_post');
-		$data['text_review'] = $this->language->get('text_review');
 		$data['text_front'] = $this->language->get('text_front');
 		$data['text_help'] = $this->language->get('text_help');
 		$data['text_homepage'] = $this->language->get('text_homepage');
@@ -44,22 +42,6 @@ class ControllerCommonHeader extends Controller {
 			$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
 			$data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 
-/*
-			// Customers
-			$this->load->model('report/customer');
-
-			$data['online_total'] = $this->model_report_customer->getTotalCustomersOnline();
-
-			$data['online'] = $this->url->link('report/customer_online', 'token=' . $this->session->data['token'], 'SSL');
-
-			$this->load->model('sale/customer');
-
-			$customer_total = $this->model_sale_customer->getTotalCustomers(array('filter_approved' => false));
-
-			$data['customer_total'] = $customer_total;
-			$data['customer_approval'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&filter_approved=0', 'SSL');
-*/
-
 			// posts
 			$this->load->model('front/post');
 
@@ -68,28 +50,6 @@ class ControllerCommonHeader extends Controller {
 			$data['post_total'] = $post_total;
 
 			$data['post'] = $this->url->link('front/post', 'token=' . $this->session->data['token'] . '&filter_quantity=0', 'SSL');
-
-/*
-			// Reviews
-			$this->load->model('front/review');
-
-			$review_total = $this->model_front_review->getTotalReviews(array('filter_status' => false));
-
-			$data['review_total'] = $review_total;
-
-			$data['review'] = $this->url->link('front/review', 'token=' . $this->session->data['token'] . '&filter_status=0', 'SSL');
-*/
-
-						// Online Stores
-/*
-			$data['stores'] = array();
-
-			$data['stores'][] = array(
-				'name' => $this->config->get('config_name'),
-				'href' => HTTP_FRONT
-			);
-*/
-
 		
 		}
 

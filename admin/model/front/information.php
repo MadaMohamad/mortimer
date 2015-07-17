@@ -1,5 +1,5 @@
 <?php
-class ModelCatalogInformation extends Model {
+class ModelFrontInformation extends Model {
 	public function addInformation($data) {
 		$this->event->trigger('pre.admin.information.add', $data);
 

@@ -1,26 +1,26 @@
 <?php
-class ControllerCatalogInformation extends Controller {
+class ControllerFrontInformation extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('catalog/information');
+		$this->load->language('front/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		$this->getList();
 	}
 
 	public function add() {
-		$this->load->language('catalog/information');
+		$this->load->language('front/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_information->addInformation($this->request->post);
+			$this->model_front_information->addInformation($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,21 +38,21 @@ class ControllerCatalogInformation extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('catalog/information');
+		$this->load->language('front/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_information->editInformation($this->request->get['information_id'], $this->request->post);
+			$this->model_front_information->editInformation($this->request->get['information_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,22 +70,22 @@ class ControllerCatalogInformation extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
 	}
 
 	public function delete() {
-		$this->load->language('catalog/information');
+		$this->load->language('front/information');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $information_id) {
-				$this->model_catalog_information->deleteInformation($information_id);
+				$this->model_front_information->deleteInformation($information_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -104,7 +104,7 @@ class ControllerCatalogInformation extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getList();
@@ -152,11 +152,11 @@ class ControllerCatalogInformation extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'href' => $this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL')
 		);
 		
-		$data['add'] = $this->url->link('catalog/information/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$data['delete'] = $this->url->link('catalog/information/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['add'] = $this->url->link('front/information/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['delete'] = $this->url->link('front/information/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$data['informations'] = array();
 
@@ -167,16 +167,16 @@ class ControllerCatalogInformation extends Controller {
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$information_total = $this->model_catalog_information->getTotalInformations();
+		$information_total = $this->model_front_information->getTotalInformations();
 
-		$results = $this->model_catalog_information->getInformations($filter_data);
+		$results = $this->model_front_information->getInformations($filter_data);
 
 		foreach ($results as $result) {
 			$data['informations'][] = array(
 				'information_id' => $result['information_id'],
 				'title'          => $result['title'],
 				'sort_order'     => $result['sort_order'],
-				'edit'           => $this->url->link('catalog/information/edit', 'token=' . $this->session->data['token'] . '&information_id=' . $result['information_id'] . $url, 'SSL')
+				'edit'           => $this->url->link('front/information/edit', 'token=' . $this->session->data['token'] . '&information_id=' . $result['information_id'] . $url, 'SSL')
 			);
 		}
 
@@ -226,8 +226,8 @@ class ControllerCatalogInformation extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_title'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . '&sort=id.title' . $url, 'SSL');
-		$data['sort_sort_order'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . '&sort=i.sort_order' . $url, 'SSL');
+		$data['sort_title'] = $this->url->link('front/information', 'token=' . $this->session->data['token'] . '&sort=id.title' . $url, 'SSL');
+		$data['sort_sort_order'] = $this->url->link('front/information', 'token=' . $this->session->data['token'] . '&sort=i.sort_order' . $url, 'SSL');
 
 		$url = '';
 
@@ -243,7 +243,7 @@ class ControllerCatalogInformation extends Controller {
 		$pagination->total = $information_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('front/information', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 
 		$data['pagination'] = $pagination->render();
 
@@ -256,7 +256,7 @@ class ControllerCatalogInformation extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('catalog/information_list.tpl', $data));
+		$this->response->setOutput($this->load->view('front/information_list.tpl', $data));
 	}
 
 	protected function getForm() {
@@ -342,19 +342,19 @@ class ControllerCatalogInformation extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'href' => $this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL')
 		);
 		
 		if (!isset($this->request->get['information_id'])) {
-			$data['action'] = $this->url->link('catalog/information/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$data['action'] = $this->url->link('front/information/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$data['action'] = $this->url->link('catalog/information/edit', 'token=' . $this->session->data['token'] . '&information_id=' . $this->request->get['information_id'] . $url, 'SSL');
+			$data['action'] = $this->url->link('front/information/edit', 'token=' . $this->session->data['token'] . '&information_id=' . $this->request->get['information_id'] . $url, 'SSL');
 		}
 
-		$data['cancel'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['cancel'] = $this->url->link('front/information', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		if (isset($this->request->get['information_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$information_info = $this->model_catalog_information->getInformation($this->request->get['information_id']);
+			$information_info = $this->model_front_information->getInformation($this->request->get['information_id']);
 		}
 
 		$data['token'] = $this->session->data['token'];
@@ -366,7 +366,7 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->request->post['information_description'])) {
 			$data['information_description'] = $this->request->post['information_description'];
 		} elseif (isset($this->request->get['information_id'])) {
-			$data['information_description'] = $this->model_catalog_information->getInformationDescriptions($this->request->get['information_id']);
+			$data['information_description'] = $this->model_front_information->getInformationDescriptions($this->request->get['information_id']);
 		} else {
 			$data['information_description'] = array();
 		}
@@ -378,7 +378,7 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->request->post['information_store'])) {
 			$data['information_store'] = $this->request->post['information_store'];
 		} elseif (isset($this->request->get['information_id'])) {
-			$data['information_store'] = $this->model_catalog_information->getInformationStores($this->request->get['information_id']);
+			$data['information_store'] = $this->model_front_information->getInformationStores($this->request->get['information_id']);
 		} else {
 			$data['information_store'] = array(0);
 		}
@@ -418,7 +418,7 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->request->post['information_layout'])) {
 			$data['information_layout'] = $this->request->post['information_layout'];
 		} elseif (isset($this->request->get['information_id'])) {
-			$data['information_layout'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
+			$data['information_layout'] = $this->model_front_information->getInformationLayouts($this->request->get['information_id']);
 		} else {
 			$data['information_layout'] = array();
 		}
@@ -431,11 +431,11 @@ class ControllerCatalogInformation extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('catalog/information_form.tpl', $data));
+		$this->response->setOutput($this->load->view('front/information_form.tpl', $data));
 	}
 
 	protected function validateForm() {
-		if (!$this->user->hasPermission('modify', 'catalog/information')) {
+		if (!$this->user->hasPermission('modify', 'front/information')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
@@ -454,9 +454,9 @@ class ControllerCatalogInformation extends Controller {
 		}
 
 		if (utf8_strlen($this->request->post['keyword']) > 0) {
-			$this->load->model('catalog/url_alias');
+			$this->load->model('front/url_alias');
 
-			$url_alias_info = $this->model_catalog_url_alias->getUrlAlias($this->request->post['keyword']);
+			$url_alias_info = $this->model_front_url_alias->getUrlAlias($this->request->post['keyword']);
 
 			if ($url_alias_info && isset($this->request->get['information_id']) && $url_alias_info['query'] != 'information_id=' . $this->request->get['information_id']) {
 				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
@@ -475,7 +475,7 @@ class ControllerCatalogInformation extends Controller {
 	}
 
 	protected function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'catalog/information')) {
+		if (!$this->user->hasPermission('modify', 'front/information')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 

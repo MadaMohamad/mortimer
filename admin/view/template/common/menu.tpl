@@ -55,27 +55,5 @@
       <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
     </ul>
   </li>
-  <li id="reports"><a class="parent"><i class="fa fa-bar-chart-o fa-fw"></i> <span><?php echo $text_reports; ?></span></a>
-    <ul>
-      <li><a class="parent"><?php echo $text_post; ?></a>
-        <ul>
-          <li><a href="<?php echo $report_post_viewed; ?>"><?php echo $text_report_post_viewed; ?></a></li>
-          <li><a href="<?php echo $report_post_purchased; ?>"><?php echo $text_report_post_purchased; ?></a></li>
-        </ul>
-      </li>
-      <li><a class="parent"><?php echo $text_customer; ?></a>
-        <ul>
-          <li><a href="<?php echo $report_customer_online; ?>"><?php echo $text_report_customer_online; ?></a></li>
-          <li><a href="<?php echo $report_customer_activity; ?>"><?php echo $text_report_customer_activity; ?></a></li>
-        </ul>
-      </li>
-      <li><a class="parent"><?php echo $text_marketing; ?></a>
-        <ul>
-          <li><a href="<?php echo $report_marketing; ?>"><?php echo $text_marketing; ?></a></li>
-          <li><a href="<?php echo $report_affiliate; ?>"><?php echo $text_report_affiliate; ?></a></li>
-          <li><a href="<?php echo $report_affiliate_activity; ?>"><?php echo $text_report_affiliate_activity; ?></a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  
 </ul>

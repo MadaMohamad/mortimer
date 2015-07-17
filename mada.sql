@@ -3,48 +3,16 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2015 at 02:19 AM
+-- Generation Time: Jul 17, 2015 at 03:16 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Database: `mada`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ds_api`
---
-
-CREATE TABLE IF NOT EXISTS `ds_api` (
-  `api_id` int(11) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `firstname` varchar(64) NOT NULL,
-  `lastname` varchar(64) NOT NULL,
-  `password` text NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ds_api`
---
-
-INSERT INTO `ds_api` (`api_id`, `username`, `firstname`, `lastname`, `password`, `status`, `date_added`, `date_modified`) VALUES
-(1, 'uh9jqeLeuWuFYIpO8Jx0nuv4E08JwrfgOfG49RZuoJzCSeQRoDHRy3M3tKDg1iCF', '', '', 'DJADaaxFjnI2HYKwcRDRLQL4aPaRxdX1mY4DysIYVRQdqaPIsTa3jmy91ORorpgUDbX1JgPexg8d7NmphDjGpXGgmXLUDroGIC8SjNwXtv1r9eWgh5mNTst5G5PKm4Qv6ODgc03Mlu3kOQHwMt9fctbjpqtSl9DhOHDr774jsyK7ERtQBtwddNCI4vafveDAlHsiEmIwaSufjdvlNiEqwGzq2PLotPpUWX3bACOaU864crfpQkWCqMsjb4NLJ3gg', 1, '2015-04-22 16:29:55', '2015-04-22 16:29:55'),
-(2, 'prG8qZPDdq8f0q5A4l7vSn0LwoOSEObt6hsn67qaop6fW1fQdcCvG273gLMlanUW', '', '', 'LDAIAqjpWfKsXp90IBmP3jIavUBL8WiJZiSaP1FlWPUt4UkDVNSPwbqhvstuER4e0M4FE9rbOCKJWvMr8f7v6nTsVCcaUX4KkyPoy7FD9QMVBZDA4Aw1oFj9ICacaUnAJ3p80uBzBNLCnODiP0Z3593ECThcoKdyDIw42xt3B56oJANY0mRwmL0oeYGIij6mrtgkgQeiLbNUbatRCBEoM5TrTZ019xergASDQwlbNywpOg7RiB5u6OcPoSHoFlWm', 1, '2015-04-22 16:29:55', '2015-04-22 16:29:55'),
-(3, 'ZN4FX9dRgmGMa5osRYqJ9siP56GGznCP17UO6yfdamp1hUjztP8s8h73dE9TsCij', '', '', '93y6rUZI6EAeZjTIzS0xzyrT2rnktLKtF8pwTF5PK5ujfDrUWhIMVzgOhJzQV99a8pNRuJh4ERdkVL5ssD4E3bSakIr6IrWGXjYHt6CyOgYjrTSaXNfQoyrP6ZLEGhLdHjl0goouLDT3WmTtzyAdnssjH3oObzsjZUa59FpKI9DflWPaLQ3y8lYGfCV61EgQY6LYB1iK0lpb841KKu9JWXQ2alySpViERudSmBdcnI3lDvwNgvX2JnvkOj244b9M', 1, '2015-04-22 16:29:56', '2015-04-22 16:29:56');
 
 -- --------------------------------------------------------
 
@@ -139,7 +107,24 @@ INSERT INTO `ds_banner_image_description` (`banner_image_id`, `language_id`, `ba
 (98, 1, 8, 'Nintendo'),
 (102, 1, 9, 'Pixel Art'),
 (103, 1, 9, 'Photomanipulation'),
-(104, 1, 9, 'Webdesign');
+(104, 1, 9, 'Webdesign'),
+(79, 2, 7, 'iPhone 6'),
+(87, 2, 6, 'HP Banner'),
+(93, 2, 8, 'Canon'),
+(92, 2, 8, 'Burger King'),
+(91, 2, 8, 'Coca Cola'),
+(90, 2, 8, 'Disney'),
+(89, 2, 8, 'Dell'),
+(80, 2, 7, 'MacBookAir'),
+(88, 2, 8, 'Harley Davidson'),
+(94, 2, 8, 'NFL'),
+(95, 2, 8, 'RedBull'),
+(96, 2, 8, 'Sony'),
+(97, 2, 8, 'Starbucks'),
+(98, 2, 8, 'Nintendo'),
+(102, 2, 9, 'Pixel Art'),
+(103, 2, 9, 'Photomanipulation'),
+(104, 2, 9, 'Webdesign');
 
 -- --------------------------------------------------------
 
@@ -152,6 +137,7 @@ CREATE TABLE IF NOT EXISTS `ds_category` (
   `image` varchar(255) DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
+  `display` tinyint(1) NOT NULL DEFAULT '0',
   `column` int(3) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
@@ -163,10 +149,10 @@ CREATE TABLE IF NOT EXISTS `ds_category` (
 -- Dumping data for table `ds_category`
 --
 
-INSERT INTO `ds_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
-(1, '', 0, 1, 1, 2, 1, '2009-01-31 01:04:25', '2015-04-24 22:01:04'),
-(2, '', 0, 1, 1, 1, 1, '2009-02-03 14:17:55', '2015-04-24 19:13:42'),
-(3, '', 3, 0, 1, 0, 1, '2015-04-24 22:29:28', '2015-05-01 09:34:46');
+INSERT INTO `ds_category` (`category_id`, `image`, `parent_id`, `top`, `display`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
+(1, '', 0, 1, 0, 1, 2, 1, '2009-01-31 01:04:25', '2015-07-09 21:41:06'),
+(2, '', 0, 1, 1, 1, 1, 1, '2009-02-03 14:17:55', '2015-07-09 21:40:29'),
+(3, '', 3, 0, 1, 1, 0, 1, '2015-04-24 22:29:28', '2015-07-09 21:40:40');
 
 -- --------------------------------------------------------
 
@@ -189,7 +175,10 @@ CREATE TABLE IF NOT EXISTS `ds_category_description` (
 --
 
 INSERT INTO `ds_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
+(1, 2, 'Blog', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'blog', '', ''),
 (1, 1, 'Blog', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'blog', '', ''),
+(2, 2, 'Gallery', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'Gallery', '', ''),
+(3, 2, 'Pixel Art', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'Pixel Art', '', ''),
 (2, 1, 'Gallery', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'Gallery', '', ''),
 (3, 1, 'Pixel Art', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;', 'pixel art', '', '');
 
@@ -222,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `ds_category_path` (
 
 INSERT INTO `ds_category_path` (`category_id`, `path_id`, `level`) VALUES
 (1, 1, 0),
-(2, 2, 1),
+(2, 2, 0),
 (3, 3, 1),
 (4, 1, 0);
 
@@ -250,307 +239,6 @@ INSERT INTO `ds_category_to_layout` (`category_id`, `store_id`, `layout_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ds_comment`
---
-
-CREATE TABLE IF NOT EXISTS `ds_comment` (
-  `comment_id` int(11) NOT NULL,
-  `parent_comment_id` int(11) NOT NULL DEFAULT '0',
-  `post_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `author` varchar(64) NOT NULL,
-  `text` text NOT NULL,
-  `rating` int(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ds_comment`
---
-
-INSERT INTO `ds_comment` (`comment_id`, `parent_comment_id`, `post_id`, `customer_id`, `author`, `text`, `rating`, `status`, `date_added`, `date_modified`) VALUES
-(1, 0, 47, 0, 'Mada Test', 'esto es un test ', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ds_country`
---
-
-CREATE TABLE IF NOT EXISTS `ds_country` (
-  `country_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `iso_code_2` varchar(2) NOT NULL,
-  `iso_code_3` varchar(3) NOT NULL,
-  `address_format` text NOT NULL,
-  `postcode_required` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=258 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `ds_country`
---
-
-INSERT INTO `ds_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
-(1, 'Afghanistan', 'AF', 'AFG', '', 0, 1),
-(2, 'Albania', 'AL', 'ALB', '', 0, 1),
-(3, 'Algeria', 'DZ', 'DZA', '', 0, 1),
-(4, 'American Samoa', 'AS', 'ASM', '', 0, 1),
-(5, 'Andorra', 'AD', 'AND', '', 0, 1),
-(6, 'Angola', 'AO', 'AGO', '', 0, 1),
-(7, 'Anguilla', 'AI', 'AIA', '', 0, 1),
-(8, 'Antarctica', 'AQ', 'ATA', '', 0, 1),
-(9, 'Antigua and Barbuda', 'AG', 'ATG', '', 0, 1),
-(10, 'Argentina', 'AR', 'ARG', '', 0, 1),
-(11, 'Armenia', 'AM', 'ARM', '', 0, 1),
-(12, 'Aruba', 'AW', 'ABW', '', 0, 1),
-(13, 'Australia', 'AU', 'AUS', '', 0, 1),
-(14, 'Austria', 'AT', 'AUT', '', 0, 1),
-(15, 'Azerbaijan', 'AZ', 'AZE', '', 0, 1),
-(16, 'Bahamas', 'BS', 'BHS', '', 0, 1),
-(17, 'Bahrain', 'BH', 'BHR', '', 0, 1),
-(18, 'Bangladesh', 'BD', 'BGD', '', 0, 1),
-(19, 'Barbados', 'BB', 'BRB', '', 0, 1),
-(20, 'Belarus', 'BY', 'BLR', '', 0, 1),
-(21, 'Belgium', 'BE', 'BEL', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}', 0, 1),
-(22, 'Belize', 'BZ', 'BLZ', '', 0, 1),
-(23, 'Benin', 'BJ', 'BEN', '', 0, 1),
-(24, 'Bermuda', 'BM', 'BMU', '', 0, 1),
-(25, 'Bhutan', 'BT', 'BTN', '', 0, 1),
-(26, 'Bolivia', 'BO', 'BOL', '', 0, 1),
-(27, 'Bosnia and Herzegovina', 'BA', 'BIH', '', 0, 1),
-(28, 'Botswana', 'BW', 'BWA', '', 0, 1),
-(29, 'Bouvet Island', 'BV', 'BVT', '', 0, 1),
-(30, 'Brazil', 'BR', 'BRA', '', 0, 1),
-(31, 'British Indian Ocean Territory', 'IO', 'IOT', '', 0, 1),
-(32, 'Brunei Darussalam', 'BN', 'BRN', '', 0, 1),
-(33, 'Bulgaria', 'BG', 'BGR', '', 0, 1),
-(34, 'Burkina Faso', 'BF', 'BFA', '', 0, 1),
-(35, 'Burundi', 'BI', 'BDI', '', 0, 1),
-(36, 'Cambodia', 'KH', 'KHM', '', 0, 1),
-(37, 'Cameroon', 'CM', 'CMR', '', 0, 1),
-(38, 'Canada', 'CA', 'CAN', '', 0, 1),
-(39, 'Cape Verde', 'CV', 'CPV', '', 0, 1),
-(40, 'Cayman Islands', 'KY', 'CYM', '', 0, 1),
-(41, 'Central African Republic', 'CF', 'CAF', '', 0, 1),
-(42, 'Chad', 'TD', 'TCD', '', 0, 1),
-(43, 'Chile', 'CL', 'CHL', '', 0, 1),
-(44, 'China', 'CN', 'CHN', '', 0, 1),
-(45, 'Christmas Island', 'CX', 'CXR', '', 0, 1),
-(46, 'Cocos (Keeling) Islands', 'CC', 'CCK', '', 0, 1),
-(47, 'Colombia', 'CO', 'COL', '', 0, 1),
-(48, 'Comoros', 'KM', 'COM', '', 0, 1),
-(49, 'Congo', 'CG', 'COG', '', 0, 1),
-(50, 'Cook Islands', 'CK', 'COK', '', 0, 1),
-(51, 'Costa Rica', 'CR', 'CRI', '', 0, 1),
-(52, 'Cote D''Ivoire', 'CI', 'CIV', '', 0, 1),
-(53, 'Croatia', 'HR', 'HRV', '', 0, 1),
-(54, 'Cuba', 'CU', 'CUB', '', 0, 1),
-(55, 'Cyprus', 'CY', 'CYP', '', 0, 1),
-(56, 'Czech Republic', 'CZ', 'CZE', '', 0, 1),
-(57, 'Denmark', 'DK', 'DNK', '', 0, 1),
-(58, 'Djibouti', 'DJ', 'DJI', '', 0, 1),
-(59, 'Dominica', 'DM', 'DMA', '', 0, 1),
-(60, 'Dominican Republic', 'DO', 'DOM', '', 0, 1),
-(61, 'East Timor', 'TL', 'TLS', '', 0, 1),
-(62, 'Ecuador', 'EC', 'ECU', '', 0, 1),
-(63, 'Egypt', 'EG', 'EGY', '', 0, 1),
-(64, 'El Salvador', 'SV', 'SLV', '', 0, 1),
-(65, 'Equatorial Guinea', 'GQ', 'GNQ', '', 0, 1),
-(66, 'Eritrea', 'ER', 'ERI', '', 0, 1),
-(67, 'Estonia', 'EE', 'EST', '', 0, 1),
-(68, 'Ethiopia', 'ET', 'ETH', '', 0, 1),
-(69, 'Falkland Islands (Malvinas)', 'FK', 'FLK', '', 0, 1),
-(70, 'Faroe Islands', 'FO', 'FRO', '', 0, 1),
-(71, 'Fiji', 'FJ', 'FJI', '', 0, 1),
-(72, 'Finland', 'FI', 'FIN', '', 0, 1),
-(74, 'France, Metropolitan', 'FR', 'FRA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}', 1, 1),
-(75, 'French Guiana', 'GF', 'GUF', '', 0, 1),
-(76, 'French Polynesia', 'PF', 'PYF', '', 0, 1),
-(77, 'French Southern Territories', 'TF', 'ATF', '', 0, 1),
-(78, 'Gabon', 'GA', 'GAB', '', 0, 1),
-(79, 'Gambia', 'GM', 'GMB', '', 0, 1),
-(80, 'Georgia', 'GE', 'GEO', '', 0, 1),
-(81, 'Germany', 'DE', 'DEU', '{company}\r\n{firstname} {lastname}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}', 1, 1),
-(82, 'Ghana', 'GH', 'GHA', '', 0, 1),
-(83, 'Gibraltar', 'GI', 'GIB', '', 0, 1),
-(84, 'Greece', 'GR', 'GRC', '', 0, 1),
-(85, 'Greenland', 'GL', 'GRL', '', 0, 1),
-(86, 'Grenada', 'GD', 'GRD', '', 0, 1),
-(87, 'Guadeloupe', 'GP', 'GLP', '', 0, 1),
-(88, 'Guam', 'GU', 'GUM', '', 0, 1),
-(89, 'Guatemala', 'GT', 'GTM', '', 0, 1),
-(90, 'Guinea', 'GN', 'GIN', '', 0, 1),
-(91, 'Guinea-Bissau', 'GW', 'GNB', '', 0, 1),
-(92, 'Guyana', 'GY', 'GUY', '', 0, 1),
-(93, 'Haiti', 'HT', 'HTI', '', 0, 1),
-(94, 'Heard and Mc Donald Islands', 'HM', 'HMD', '', 0, 1),
-(95, 'Honduras', 'HN', 'HND', '', 0, 1),
-(96, 'Hong Kong', 'HK', 'HKG', '', 0, 1),
-(97, 'Hungary', 'HU', 'HUN', '', 0, 1),
-(98, 'Iceland', 'IS', 'ISL', '', 0, 1),
-(99, 'India', 'IN', 'IND', '', 0, 1),
-(100, 'Indonesia', 'ID', 'IDN', '', 0, 1),
-(101, 'Iran (Islamic Republic of)', 'IR', 'IRN', '', 0, 1),
-(102, 'Iraq', 'IQ', 'IRQ', '', 0, 1),
-(103, 'Ireland', 'IE', 'IRL', '', 0, 1),
-(104, 'Israel', 'IL', 'ISR', '', 0, 1),
-(105, 'Italy', 'IT', 'ITA', '', 0, 1),
-(106, 'Jamaica', 'JM', 'JAM', '', 0, 1),
-(107, 'Japan', 'JP', 'JPN', '', 0, 1),
-(108, 'Jordan', 'JO', 'JOR', '', 0, 1),
-(109, 'Kazakhstan', 'KZ', 'KAZ', '', 0, 1),
-(110, 'Kenya', 'KE', 'KEN', '', 0, 1),
-(111, 'Kiribati', 'KI', 'KIR', '', 0, 1),
-(112, 'North Korea', 'KP', 'PRK', '', 0, 1),
-(113, 'Korea, Republic of', 'KR', 'KOR', '', 0, 1),
-(114, 'Kuwait', 'KW', 'KWT', '', 0, 1),
-(115, 'Kyrgyzstan', 'KG', 'KGZ', '', 0, 1),
-(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', '', 0, 1),
-(117, 'Latvia', 'LV', 'LVA', '', 0, 1),
-(118, 'Lebanon', 'LB', 'LBN', '', 0, 1),
-(119, 'Lesotho', 'LS', 'LSO', '', 0, 1),
-(120, 'Liberia', 'LR', 'LBR', '', 0, 1),
-(121, 'Libyan Arab Jamahiriya', 'LY', 'LBY', '', 0, 1),
-(122, 'Liechtenstein', 'LI', 'LIE', '', 0, 1),
-(123, 'Lithuania', 'LT', 'LTU', '', 0, 1),
-(124, 'Luxembourg', 'LU', 'LUX', '', 0, 1),
-(125, 'Macau', 'MO', 'MAC', '', 0, 1),
-(126, 'FYROM', 'MK', 'MKD', '', 0, 1),
-(127, 'Madagascar', 'MG', 'MDG', '', 0, 1),
-(128, 'Malawi', 'MW', 'MWI', '', 0, 1),
-(129, 'Malaysia', 'MY', 'MYS', '', 0, 1),
-(130, 'Maldives', 'MV', 'MDV', '', 0, 1),
-(131, 'Mali', 'ML', 'MLI', '', 0, 1),
-(132, 'Malta', 'MT', 'MLT', '', 0, 1),
-(133, 'Marshall Islands', 'MH', 'MHL', '', 0, 1),
-(134, 'Martinique', 'MQ', 'MTQ', '', 0, 1),
-(135, 'Mauritania', 'MR', 'MRT', '', 0, 1),
-(136, 'Mauritius', 'MU', 'MUS', '', 0, 1),
-(137, 'Mayotte', 'YT', 'MYT', '', 0, 1),
-(138, 'Mexico', 'MX', 'MEX', '', 0, 1),
-(139, 'Micronesia, Federated States of', 'FM', 'FSM', '', 0, 1),
-(140, 'Moldova, Republic of', 'MD', 'MDA', '', 0, 1),
-(141, 'Monaco', 'MC', 'MCO', '', 0, 1),
-(142, 'Mongolia', 'MN', 'MNG', '', 0, 1),
-(143, 'Montserrat', 'MS', 'MSR', '', 0, 1),
-(144, 'Morocco', 'MA', 'MAR', '', 0, 1),
-(145, 'Mozambique', 'MZ', 'MOZ', '', 0, 1),
-(146, 'Myanmar', 'MM', 'MMR', '', 0, 1),
-(147, 'Namibia', 'NA', 'NAM', '', 0, 1),
-(148, 'Nauru', 'NR', 'NRU', '', 0, 1),
-(149, 'Nepal', 'NP', 'NPL', '', 0, 1),
-(150, 'Netherlands', 'NL', 'NLD', '', 0, 1),
-(151, 'Netherlands Antilles', 'AN', 'ANT', '', 0, 1),
-(152, 'New Caledonia', 'NC', 'NCL', '', 0, 1),
-(153, 'New Zealand', 'NZ', 'NZL', '', 0, 1),
-(154, 'Nicaragua', 'NI', 'NIC', '', 0, 1),
-(155, 'Niger', 'NE', 'NER', '', 0, 1),
-(156, 'Nigeria', 'NG', 'NGA', '', 0, 1),
-(157, 'Niue', 'NU', 'NIU', '', 0, 1),
-(158, 'Norfolk Island', 'NF', 'NFK', '', 0, 1),
-(159, 'Northern Mariana Islands', 'MP', 'MNP', '', 0, 1),
-(160, 'Norway', 'NO', 'NOR', '', 0, 1),
-(161, 'Oman', 'OM', 'OMN', '', 0, 1),
-(162, 'Pakistan', 'PK', 'PAK', '', 0, 1),
-(163, 'Palau', 'PW', 'PLW', '', 0, 1),
-(164, 'Panama', 'PA', 'PAN', '', 0, 1),
-(165, 'Papua New Guinea', 'PG', 'PNG', '', 0, 1),
-(166, 'Paraguay', 'PY', 'PRY', '', 0, 1),
-(167, 'Peru', 'PE', 'PER', '', 0, 1),
-(168, 'Philippines', 'PH', 'PHL', '', 0, 1),
-(169, 'Pitcairn', 'PN', 'PCN', '', 0, 1),
-(170, 'Poland', 'PL', 'POL', '', 0, 1),
-(171, 'Portugal', 'PT', 'PRT', '', 0, 1),
-(172, 'Puerto Rico', 'PR', 'PRI', '', 0, 1),
-(173, 'Qatar', 'QA', 'QAT', '', 0, 1),
-(174, 'Reunion', 'RE', 'REU', '', 0, 1),
-(175, 'Romania', 'RO', 'ROM', '', 0, 1),
-(176, 'Russian Federation', 'RU', 'RUS', '', 0, 1),
-(177, 'Rwanda', 'RW', 'RWA', '', 0, 1),
-(178, 'Saint Kitts and Nevis', 'KN', 'KNA', '', 0, 1),
-(179, 'Saint Lucia', 'LC', 'LCA', '', 0, 1),
-(180, 'Saint Vincent and the Grenadines', 'VC', 'VCT', '', 0, 1),
-(181, 'Samoa', 'WS', 'WSM', '', 0, 1),
-(182, 'San Marino', 'SM', 'SMR', '', 0, 1),
-(183, 'Sao Tome and Principe', 'ST', 'STP', '', 0, 1),
-(184, 'Saudi Arabia', 'SA', 'SAU', '', 0, 1),
-(185, 'Senegal', 'SN', 'SEN', '', 0, 1),
-(186, 'Seychelles', 'SC', 'SYC', '', 0, 1),
-(187, 'Sierra Leone', 'SL', 'SLE', '', 0, 1),
-(188, 'Singapore', 'SG', 'SGP', '', 0, 1),
-(189, 'Slovak Republic', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 0, 1),
-(190, 'Slovenia', 'SI', 'SVN', '', 0, 1),
-(191, 'Solomon Islands', 'SB', 'SLB', '', 0, 1),
-(192, 'Somalia', 'SO', 'SOM', '', 0, 1),
-(193, 'South Africa', 'ZA', 'ZAF', '', 0, 1),
-(194, 'South Georgia &amp; South Sandwich Islands', 'GS', 'SGS', '', 0, 1),
-(195, 'Spain', 'ES', 'ESP', '', 0, 1),
-(196, 'Sri Lanka', 'LK', 'LKA', '', 0, 1),
-(197, 'St. Helena', 'SH', 'SHN', '', 0, 1),
-(198, 'St. Pierre and Miquelon', 'PM', 'SPM', '', 0, 1),
-(199, 'Sudan', 'SD', 'SDN', '', 0, 1),
-(200, 'Suriname', 'SR', 'SUR', '', 0, 1),
-(201, 'Svalbard and Jan Mayen Islands', 'SJ', 'SJM', '', 0, 1),
-(202, 'Swaziland', 'SZ', 'SWZ', '', 0, 1),
-(203, 'Sweden', 'SE', 'SWE', '{company}\r\n{firstname} {lastname}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}', 1, 1),
-(204, 'Switzerland', 'CH', 'CHE', '', 0, 1),
-(205, 'Syrian Arab Republic', 'SY', 'SYR', '', 0, 1),
-(206, 'Taiwan', 'TW', 'TWN', '', 0, 1),
-(207, 'Tajikistan', 'TJ', 'TJK', '', 0, 1),
-(208, 'Tanzania, United Republic of', 'TZ', 'TZA', '', 0, 1),
-(209, 'Thailand', 'TH', 'THA', '', 0, 1),
-(210, 'Togo', 'TG', 'TGO', '', 0, 1),
-(211, 'Tokelau', 'TK', 'TKL', '', 0, 1),
-(212, 'Tonga', 'TO', 'TON', '', 0, 1),
-(213, 'Trinidad and Tobago', 'TT', 'TTO', '', 0, 1),
-(214, 'Tunisia', 'TN', 'TUN', '', 0, 1),
-(215, 'Turkey', 'TR', 'TUR', '', 0, 1),
-(216, 'Turkmenistan', 'TM', 'TKM', '', 0, 1),
-(217, 'Turks and Caicos Islands', 'TC', 'TCA', '', 0, 1),
-(218, 'Tuvalu', 'TV', 'TUV', '', 0, 1),
-(219, 'Uganda', 'UG', 'UGA', '', 0, 1),
-(220, 'Ukraine', 'UA', 'UKR', '', 0, 1),
-(221, 'United Arab Emirates', 'AE', 'ARE', '', 0, 1),
-(222, 'United Kingdom', 'GB', 'GBR', '', 1, 1),
-(223, 'United States', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 0, 1),
-(224, 'United States Minor Outlying Islands', 'UM', 'UMI', '', 0, 1),
-(225, 'Uruguay', 'UY', 'URY', '', 0, 1),
-(226, 'Uzbekistan', 'UZ', 'UZB', '', 0, 1),
-(227, 'Vanuatu', 'VU', 'VUT', '', 0, 1),
-(228, 'Vatican City State (Holy See)', 'VA', 'VAT', '', 0, 1),
-(229, 'Venezuela', 'VE', 'VEN', '', 0, 1),
-(230, 'Viet Nam', 'VN', 'VNM', '', 0, 1),
-(231, 'Virgin Islands (British)', 'VG', 'VGB', '', 0, 1),
-(232, 'Virgin Islands (U.S.)', 'VI', 'VIR', '', 0, 1),
-(233, 'Wallis and Futuna Islands', 'WF', 'WLF', '', 0, 1),
-(234, 'Western Sahara', 'EH', 'ESH', '', 0, 1),
-(235, 'Yemen', 'YE', 'YEM', '', 0, 1),
-(237, 'Democratic Republic of Congo', 'CD', 'COD', '', 0, 1),
-(238, 'Zambia', 'ZM', 'ZMB', '', 0, 1),
-(239, 'Zimbabwe', 'ZW', 'ZWE', '', 0, 1),
-(242, 'Montenegro', 'ME', 'MNE', '', 0, 1),
-(243, 'Serbia', 'RS', 'SRB', '', 0, 1),
-(244, 'Aaland Islands', 'AX', 'ALA', '', 0, 1),
-(245, 'Bonaire, Sint Eustatius and Saba', 'BQ', 'BES', '', 0, 1),
-(246, 'Curacao', 'CW', 'CUW', '', 0, 1),
-(247, 'Palestinian Territory, Occupied', 'PS', 'PSE', '', 0, 1),
-(248, 'South Sudan', 'SS', 'SSD', '', 0, 1),
-(249, 'St. Barthelemy', 'BL', 'BLM', '', 0, 1),
-(250, 'St. Martin (French part)', 'MF', 'MAF', '', 0, 1),
-(251, 'Canary Islands', 'IC', 'ICA', '', 0, 1),
-(252, 'Ascension Island (British)', 'AC', 'ASC', '', 0, 1),
-(253, 'Kosovo, Republic of', 'XK', 'UNK', '', 0, 1),
-(254, 'Isle of Man', 'IM', 'IMN', '', 0, 1),
-(255, 'Tristan da Cunha', 'TA', 'SHN', '', 0, 1),
-(256, 'Guernsey', 'GG', 'GGY', '', 0, 1),
-(257, 'Jersey', 'JE', 'JEY', '', 0, 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `ds_event`
 --
 
@@ -571,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `ds_extension` (
   `extension_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=429 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=430 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_extension`
@@ -582,6 +270,7 @@ INSERT INTO `ds_extension` (`extension_id`, `type`, `code`) VALUES
 (426, 'module', 'carousel'),
 (413, 'module', 'category'),
 (408, 'module', 'account'),
+(429, 'module', 'facebook_comments'),
 (427, 'module', 'featured'),
 (419, 'module', 'slideshow'),
 (428, 'module', 'latest');
@@ -681,7 +370,11 @@ INSERT INTO `ds_information_description` (`information_id`, `language_id`, `titl
 (4, 1, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n', '', '', ''),
 (5, 1, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n', '', '', ''),
 (3, 1, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n', '', '', ''),
-(6, 1, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n', '', '', '');
+(6, 1, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n', '', '', ''),
+(4, 2, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n', '', '', ''),
+(5, 2, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n', '', '', ''),
+(3, 2, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n', '', '', ''),
+(6, 2, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -731,14 +424,15 @@ CREATE TABLE IF NOT EXISTS `ds_language` (
   `directory` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_language`
 --
 
 INSERT INTO `ds_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `sort_order`, `status`) VALUES
-(1, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 1, 1);
+(1, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 1, 1),
+(2, 'Español', 'es', 'es_ES.UTF-8,es_ES,spanish', 'es.png', 'spanish', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -757,17 +451,12 @@ CREATE TABLE IF NOT EXISTS `ds_layout` (
 
 INSERT INTO `ds_layout` (`layout_id`, `name`) VALUES
 (1, 'Home'),
-(2, 'Product'),
+(2, 'Post'),
 (3, 'Category'),
 (4, 'Default'),
-(5, 'Manufacturer'),
-(6, 'Account'),
-(7, 'Checkout'),
 (8, 'Contact'),
 (9, 'Sitemap'),
-(10, 'Affiliate'),
 (11, 'Information'),
-(12, 'Compare'),
 (13, 'Search');
 
 -- --------------------------------------------------------
@@ -782,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `ds_layout_module` (
   `code` varchar(64) NOT NULL,
   `position` varchar(14) NOT NULL,
   `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_layout_module`
@@ -791,9 +480,7 @@ CREATE TABLE IF NOT EXISTS `ds_layout_module` (
 INSERT INTO `ds_layout_module` (`layout_module_id`, `layout_id`, `code`, `position`, `sort_order`) VALUES
 (2, 4, '0', 'content_top', 0),
 (3, 4, '0', 'content_top', 1),
-(20, 5, '0', 'column_left', 2),
-(69, 10, 'affiliate', 'column_right', 1),
-(68, 6, 'account', 'column_right', 1),
+(76, 2, 'facebook_comments.32', 'content_bottom', 0),
 (75, 1, 'featured.28', 'content_top', 2),
 (74, 1, 'latest.31', 'content_top', 1),
 (72, 3, 'category', 'column_left', 1),
@@ -810,46 +497,21 @@ CREATE TABLE IF NOT EXISTS `ds_layout_route` (
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `route` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_layout_route`
 --
 
 INSERT INTO `ds_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
-(38, 6, 0, 'account/%'),
-(17, 10, 0, 'affiliate/%'),
 (44, 3, 0, 'product/category'),
 (54, 1, 0, 'common/home'),
-(20, 2, 0, 'product/product'),
+(56, 2, 0, 'post/post'),
 (24, 11, 0, 'information/information'),
-(23, 7, 0, 'checkout/%'),
 (31, 8, 0, 'information/contact'),
 (32, 9, 0, 'information/sitemap'),
 (34, 4, 0, ''),
-(45, 5, 0, 'product/manufacturer'),
-(52, 12, 0, 'product/compare'),
 (53, 13, 0, 'product/search');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ds_likes`
---
-
-CREATE TABLE IF NOT EXISTS `ds_likes` (
-  `like_id` int(11) unsigned NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `ip` varchar(25) NOT NULL DEFAULT '',
-  `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ds_likes`
---
-
-INSERT INTO `ds_likes` (`like_id`, `post_id`, `ip`, `date_added`) VALUES
-(1, 47, '192.168.0.0', NULL);
 
 -- --------------------------------------------------------
 
@@ -895,7 +557,7 @@ CREATE TABLE IF NOT EXISTS `ds_module` (
   `name` varchar(64) NOT NULL,
   `code` varchar(32) NOT NULL,
   `setting` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_module`
@@ -906,7 +568,8 @@ INSERT INTO `ds_module` (`module_id`, `name`, `code`, `setting`) VALUES
 (29, 'Carousel - Home Page', 'carousel', 'a:5:{s:4:"name";s:20:"Carousel - Home Page";s:9:"banner_id";s:1:"9";s:5:"width";s:3:"300";s:6:"height";s:3:"185";s:6:"status";s:1:"0";}'),
 (28, 'Featured - Home Page', 'featured', 'a:6:{s:4:"name";s:20:"Featured - Home Page";s:4:"post";a:4:{i:0;s:2:"42";i:1;s:2:"47";i:2;s:2:"28";i:3;s:2:"41";}s:5:"limit";s:1:"4";s:5:"width";s:3:"200";s:6:"height";s:3:"200";s:6:"status";s:1:"1";}'),
 (27, 'Slideshow - Home Page', 'slideshow', 'a:5:{s:4:"name";s:21:"Slideshow - Home Page";s:9:"banner_id";s:1:"9";s:5:"width";s:4:"1200";s:6:"height";s:3:"380";s:6:"status";s:1:"0";}'),
-(31, 'Home page', 'latest', 'a:5:{s:4:"name";s:9:"Home page";s:5:"limit";s:1:"4";s:5:"width";s:3:"100";s:6:"height";s:3:"100";s:6:"status";s:1:"1";}');
+(31, 'Home page', 'latest', 'a:5:{s:4:"name";s:9:"Home page";s:5:"limit";s:1:"4";s:5:"width";s:3:"100";s:6:"height";s:3:"100";s:6:"status";s:1:"1";}'),
+(32, 'Facebook Comments', 'facebook_comments', 'a:6:{s:4:"name";s:17:"Facebook Comments";s:6:"app_id";s:15:"868724583216320";s:12:"color_scheme";s:5:"light";s:9:"num_posts";s:1:"5";s:8:"order_by";s:6:"social";s:6:"status";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -919,6 +582,7 @@ CREATE TABLE IF NOT EXISTS `ds_post` (
   `image` varchar(255) DEFAULT NULL,
   `sort_order` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
+  `display` tinyint(1) NOT NULL,
   `viewed` int(5) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
@@ -929,11 +593,11 @@ CREATE TABLE IF NOT EXISTS `ds_post` (
 -- Dumping data for table `ds_post`
 --
 
-INSERT INTO `ds_post` (`post_id`, `image`, `sort_order`, `status`, `viewed`, `user_id`, `date_added`, `date_modified`) VALUES
-(28, 'catalog/Pixel/3.gif', 0, 1, 9, 1, '2009-02-03 16:06:50', '2015-05-01 09:49:13'),
-(41, 'catalog/Pixel/lilac.png', 0, 1, 14, 1, '2009-02-03 21:07:26', '2015-05-01 09:48:57'),
-(42, 'catalog/Photomanip/open door.png', 0, 1, 3, 1, '2009-02-03 21:07:37', '2015-05-01 09:49:04'),
-(47, 'catalog/Photomanip/Our Universe.png', 0, 1, 26, 1, '2009-02-03 21:08:40', '2015-05-01 09:48:47');
+INSERT INTO `ds_post` (`post_id`, `image`, `sort_order`, `status`, `display`, `viewed`, `user_id`, `date_added`, `date_modified`) VALUES
+(28, 'catalog/Pixel/3.gif', 0, 1, 0, 10, 1, '2009-02-03 16:06:50', '2015-05-01 09:49:13'),
+(41, 'catalog/Pixel/lilac.png', 0, 1, 0, 20, 1, '2009-02-03 21:07:26', '2015-05-01 09:48:57'),
+(42, 'catalog/Photomanip/open door.png', 0, 1, 0, 6, 1, '2009-02-03 21:07:37', '2015-05-01 09:49:04'),
+(47, 'catalog/Photomanip/Our Universe.png', 0, 1, 0, 94, 1, '2009-02-03 21:08:40', '2015-05-01 09:48:47');
 
 -- --------------------------------------------------------
 
@@ -958,6 +622,10 @@ CREATE TABLE IF NOT EXISTS `ds_post_description` (
 
 INSERT INTO `ds_post_description` (`post_id`, `language_id`, `name`, `description`, `tag`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
 (28, 1, 'Thing', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm® MSM 7201A™ 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile® 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO™ 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth® 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi®: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB™ (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD™ memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Thing', '', ''),
+(28, 2, 'Thing', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm® MSM 7201A™ 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile® 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO™ 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth® 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi®: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB™ (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD™ memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', ''),
+(47, 2, 'Delusion', '&lt;p&gt;&quot;A human being is a part of a whole, called by us _universe_, a part limited in time and space. He experiences himself, his thoughts and feelings as something separated from the rest... a kind of optical delusion of his consciousness. This delusion is a kind of prison for us, restricting us to our personal desires and to affection for a few persons nearest to us. Our task must be to free ourselves from this prison by widening our circle of compassion to embrace all living creatures and the whole of nature in its beauty.&quot; - Albert Einstein.&lt;br&gt;&lt;/p&gt;', '', '', '', ''),
+(41, 2, 'Lilac', '&lt;div&gt;\r\n	Just when you thought iMac had everything, now there´s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife ´08, and it´s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', '', '', ''),
+(42, 2, 'Open Door', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there''s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it''s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple''s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO ''03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', ''),
 (47, 1, 'Delusion', '&lt;p&gt;&quot;A human being is a part of a whole, called by us _universe_, a part limited in time and space. He experiences himself, his thoughts and feelings as something separated from the rest... a kind of optical delusion of his consciousness. This delusion is a kind of prison for us, restricting us to our personal desires and to affection for a few persons nearest to us. Our task must be to free ourselves from this prison by widening our circle of compassion to embrace all living creatures and the whole of nature in its beauty.&quot; - Albert Einstein.&lt;br&gt;&lt;/p&gt;', '', 'delision', '', ''),
 (41, 1, 'Lilac', '&lt;div&gt;\r\n	Just when you thought iMac had everything, now there´s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife ´08, and it´s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', 'Lilac', '', ''),
 (42, 1, 'Open Door', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there''s no limit to what you can achieve. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it''s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple''s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br&gt;\r\n	&lt;br&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170° horizontal; 170° vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50° to 95° F (10° to 35° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40° to 116° F (-40° to 47° C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO ''03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'dsadada', '', '');
@@ -1061,7 +729,7 @@ CREATE TABLE IF NOT EXISTS `ds_setting` (
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=292 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=512 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ds_setting`
@@ -1070,86 +738,63 @@ CREATE TABLE IF NOT EXISTS `ds_setting` (
 INSERT INTO `ds_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES
 (146, 0, 'category', 'category_status', '1', 0),
 (158, 0, 'account', 'account_status', '1', 0),
-(267, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(266, 0, 'config', 'config_shared', '0', 0),
-(265, 0, 'config', 'config_secure', '0', 0),
-(264, 0, 'config', 'config_fraud_status_id', '7', 0),
-(263, 0, 'config', 'config_fraud_score', '', 0),
-(262, 0, 'config', 'config_fraud_key', '', 0),
+(501, 0, 'config', 'config_seo_url', '0', 0),
+(502, 0, 'config', 'config_file_max_size', '300000', 0),
+(503, 0, 'config', 'config_file_ext_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
+(504, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
+(505, 0, 'config', 'config_maintenance', '1', 0),
+(506, 0, 'config', 'config_password', '1', 0),
+(507, 0, 'config', 'config_compression', '0', 0),
+(508, 0, 'config', 'config_error_display', '1', 0),
+(509, 0, 'config', 'config_error_log', '1', 0),
+(510, 0, 'config', 'config_error_filename', 'error.log', 0),
+(511, 0, 'config', 'config_google_analytics', '', 0),
 (94, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (95, 0, 'voucher', 'voucher_status', '1', 0),
-(261, 0, 'config', 'config_fraud_detection', '0', 0),
-(260, 0, 'config', 'config_mail_alert', '', 0),
-(259, 0, 'config', 'config_mail', 'a:7:{s:8:"protocol";s:4:"mail";s:9:"parameter";s:0:"";s:13:"smtp_hostname";s:0:"";s:13:"smtp_username";s:0:"";s:13:"smtp_password";s:0:"";s:9:"smtp_port";s:0:"";s:12:"smtp_timeout";s:0:"";}', 1),
-(258, 0, 'config', 'config_ftp_status', '0', 0),
-(257, 0, 'config', 'config_ftp_root', '', 0),
-(256, 0, 'config', 'config_ftp_password', '', 0),
-(255, 0, 'config', 'config_ftp_username', '', 0),
-(254, 0, 'config', 'config_ftp_port', '21', 0),
-(253, 0, 'config', 'config_ftp_hostname', '', 0),
-(252, 0, 'config', 'config_image_location_height', '50', 0),
-(251, 0, 'config', 'config_image_location_width', '268', 0),
-(250, 0, 'config', 'config_image_cart_height', '47', 0),
-(249, 0, 'config', 'config_image_cart_width', '47', 0),
-(248, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(181, 0, 'config', 'config_meta_title', 'DS - Designs', 0),
-(182, 0, 'config', 'config_meta_description', 'My Store', 0),
-(183, 0, 'config', 'config_meta_keyword', '', 0),
-(184, 0, 'config', 'config_template', 'default', 0),
-(185, 0, 'config', 'config_layout_id', '4', 0),
-(186, 0, 'config', 'config_country_id', '222', 0),
-(187, 0, 'config', 'config_zone_id', '3563', 0),
-(188, 0, 'config', 'config_language', 'en', 0),
-(189, 0, 'config', 'config_admin_language', 'en', 0),
-(194, 0, 'config', 'config_post_count', '1', 0),
-(195, 0, 'config', 'config_post_limit', '15', 0),
-(196, 0, 'config', 'config_post_description_length', '100', 0),
-(197, 0, 'config', 'config_limit_admin', '20', 0),
-(198, 0, 'config', 'config_review_status', '1', 0),
-(199, 0, 'config', 'config_review_guest', '1', 0),
-(200, 0, 'config', 'config_review_mail', '0', 0),
-(206, 0, 'config', 'config_customer_online', '0', 0),
-(207, 0, 'config', 'config_customer_group_id', '1', 0),
-(208, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(209, 0, 'config', 'config_customer_price', '0', 0),
-(210, 0, 'config', 'config_account_id', '3', 0),
-(211, 0, 'config', 'config_account_mail', '0', 0),
-(291, 0, 'config', 'config_api_id', '3', 0),
-(231, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
-(232, 0, 'config', 'config_icon', 'catalog/cart.png', 0),
-(233, 0, 'config', 'config_image_category_width', '80', 0),
-(234, 0, 'config', 'config_image_category_height', '80', 0),
-(235, 0, 'config', 'config_image_thumb_width', '228', 0),
-(236, 0, 'config', 'config_image_thumb_height', '228', 0),
-(237, 0, 'config', 'config_image_popup_width', '500', 0),
-(238, 0, 'config', 'config_image_popup_height', '500', 0),
-(239, 0, 'config', 'config_image_post_width', '228', 0),
-(240, 0, 'config', 'config_image_post_height', '228', 0),
-(243, 0, 'config', 'config_image_related_width', '80', 0),
-(244, 0, 'config', 'config_image_related_height', '80', 0),
-(180, 0, 'config', 'config_comment', '', 0),
-(179, 0, 'config', 'config_open', '', 0),
-(178, 0, 'config', 'config_image', '', 0),
-(177, 0, 'config', 'config_fax', '', 0),
-(176, 0, 'config', 'config_telephone', '123456789', 0),
-(288, 0, 'config', 'config_email', 'mada_xo@dark-souls.net', 0),
-(174, 0, 'config', 'config_geocode', '', 0),
-(172, 0, 'config', 'config_owner', 'Mada Mohamad', 0),
-(173, 0, 'config', 'config_address', 'Address 1', 0),
-(171, 0, 'config', 'config_name', 'DS - Designs', 0),
-(268, 0, 'config', 'config_seo_url', '0', 0),
-(269, 0, 'config', 'config_file_max_size', '300000', 0),
-(270, 0, 'config', 'config_file_ext_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
-(271, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
-(272, 0, 'config', 'config_maintenance', '0', 0),
-(273, 0, 'config', 'config_password', '1', 0),
-(290, 0, 'config', 'config_encryption', '9dcecda42ca8cb3ac9ce0748031d4f22', 0),
-(275, 0, 'config', 'config_compression', '0', 0),
-(276, 0, 'config', 'config_error_display', '1', 0),
-(277, 0, 'config', 'config_error_log', '1', 0),
-(278, 0, 'config', 'config_error_filename', 'error.log', 0),
-(279, 0, 'config', 'config_google_analytics', '', 0),
-(289, 0, 'config', 'config_url', 'http://localhost:8888/mada/', 0);
+(492, 0, 'config', 'config_ftp_username', '', 0),
+(493, 0, 'config', 'config_ftp_password', '', 0),
+(494, 0, 'config', 'config_ftp_root', '', 0),
+(495, 0, 'config', 'config_ftp_status', '0', 0),
+(496, 0, 'config', 'config_mail', 'a:7:{s:8:"protocol";s:4:"mail";s:9:"parameter";s:0:"";s:13:"smtp_hostname";s:0:"";s:13:"smtp_username";s:0:"";s:13:"smtp_password";s:0:"";s:9:"smtp_port";s:0:"";s:12:"smtp_timeout";s:0:"";}', 1),
+(497, 0, 'config', 'config_mail_alert', '', 0),
+(498, 0, 'config', 'config_secure', '0', 0),
+(499, 0, 'config', 'config_shared', '0', 0),
+(500, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
+(491, 0, 'config', 'config_ftp_port', '21', 0),
+(490, 0, 'config', 'config_ftp_hostname', 'localhost:8888', 0),
+(489, 0, 'config', 'config_image_related_height', '80', 0),
+(488, 0, 'config', 'config_image_related_width', '80', 0),
+(487, 0, 'config', 'config_image_additional_height', '200', 0),
+(485, 0, 'config', 'config_image_post_height', '228', 0),
+(486, 0, 'config', 'config_image_additional_width', '200', 0),
+(484, 0, 'config', 'config_image_post_width', '228', 0),
+(483, 0, 'config', 'config_image_popup_height', '500', 0),
+(482, 0, 'config', 'config_image_popup_width', '500', 0),
+(481, 0, 'config', 'config_image_thumb_height', '228', 0),
+(480, 0, 'config', 'config_image_thumb_width', '228', 0),
+(479, 0, 'config', 'config_image_category_height', '80', 0),
+(478, 0, 'config', 'config_image_category_width', '80', 0),
+(477, 0, 'config', 'config_icon', 'catalog/cart.png', 0),
+(475, 0, 'config', 'config_limit_admin', '20', 0),
+(476, 0, 'config', 'config_logo', 'catalog/logo.png', 0),
+(474, 0, 'config', 'config_post_description_length', '100', 0),
+(473, 0, 'config', 'config_post_limit', '15', 0),
+(472, 0, 'config', 'config_post_count', '0', 0),
+(471, 0, 'config', 'config_admin_language', 'en', 0),
+(470, 0, 'config', 'config_language', 'en', 0),
+(469, 0, 'config', 'config_layout_id', '4', 0),
+(468, 0, 'config', 'config_template', 'default', 0),
+(467, 0, 'config', 'config_meta_keyword', '', 0),
+(465, 0, 'config', 'config_meta_title', 'DS - Designs', 0),
+(466, 0, 'config', 'config_meta_description', 'My Store', 0),
+(464, 0, 'config', 'config_about', '', 0),
+(463, 0, 'config', 'config_image', '', 0),
+(462, 0, 'config', 'config_fax', '', 0),
+(460, 0, 'config', 'config_email', 'mada_xo@dark-souls.net', 0),
+(461, 0, 'config', 'config_telephone', '123456789', 0),
+(459, 0, 'config', 'config_address', 'Address 1', 0),
+(458, 0, 'config', 'config_owner', 'Mada Mohamad', 0),
+(457, 0, 'config', 'config_name', 'DS - Designs', 0);
 
 -- --------------------------------------------------------
 
@@ -1263,7 +908,7 @@ CREATE TABLE IF NOT EXISTS `ds_user_group` (
 --
 
 INSERT INTO `ds_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Administrator', 'a:2:{s:6:"access";a:75:{i:0;s:18:"common/column_left";i:1;s:18:"common/filemanager";i:2;s:11:"common/menu";i:3;s:14:"common/profile";i:4;s:12:"common/stats";i:5;s:18:"dashboard/activity";i:6;s:15:"dashboard/chart";i:7;s:18:"dashboard/customer";i:8;s:13:"dashboard/map";i:9;s:16:"dashboard/online";i:10;s:16:"dashboard/recent";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:19:"extension/installer";i:15;s:22:"extension/modification";i:16;s:16:"extension/module";i:17;s:16:"feed/google_base";i:18;s:19:"feed/google_sitemap";i:19;s:14:"front/category";i:20;s:12:"front/filter";i:21;s:17:"front/information";i:22;s:10:"front/post";i:23;s:12:"front/review";i:24;s:20:"localisation/country";i:25;s:21:"localisation/currency";i:26;s:21:"localisation/geo_zone";i:27;s:21:"localisation/language";i:28;s:25:"localisation/length_class";i:29;s:21:"localisation/location";i:30;s:25:"localisation/order_status";i:31;s:26:"localisation/return_action";i:32;s:26:"localisation/return_reason";i:33;s:26:"localisation/return_status";i:34;s:25:"localisation/stock_status";i:35;s:22:"localisation/tax_class";i:36;s:21:"localisation/tax_rate";i:37;s:25:"localisation/weight_class";i:38;s:17:"localisation/zone";i:39;s:19:"marketing/affiliate";i:40;s:17:"marketing/contact";i:41;s:16:"marketing/coupon";i:42;s:19:"marketing/marketing";i:43;s:14:"module/account";i:44;s:13:"module/banner";i:45;s:15:"module/carousel";i:46;s:15:"module/category";i:47;s:15:"module/featured";i:48;s:13:"module/filter";i:49;s:22:"module/google_hangouts";i:50;s:11:"module/html";i:51;s:18:"module/information";i:52;s:13:"module/latest";i:53;s:16:"module/slideshow";i:54;s:24:"report/customer_activity";i:55;s:22:"report/customer_credit";i:56;s:21:"report/customer_login";i:57;s:22:"report/customer_online";i:58;s:21:"report/customer_order";i:59;s:22:"report/customer_reward";i:60;s:16:"report/marketing";i:61;s:21:"report/product_viewed";i:62;s:17:"sale/custom_field";i:63;s:13:"sale/customer";i:64;s:20:"sale/customer_ban_ip";i:65;s:19:"sale/customer_group";i:66;s:15:"setting/setting";i:67;s:13:"setting/store";i:68;s:11:"tool/backup";i:69;s:14:"tool/error_log";i:70;s:11:"tool/upload";i:71;s:8:"user/api";i:72;s:9:"user/user";i:73;s:20:"user/user_permission";i:74;s:13:"module/latest";}s:6:"modify";a:75:{i:0;s:18:"common/column_left";i:1;s:18:"common/filemanager";i:2;s:11:"common/menu";i:3;s:14:"common/profile";i:4;s:12:"common/stats";i:5;s:18:"dashboard/activity";i:6;s:15:"dashboard/chart";i:7;s:18:"dashboard/customer";i:8;s:13:"dashboard/map";i:9;s:16:"dashboard/online";i:10;s:16:"dashboard/recent";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:19:"extension/installer";i:15;s:22:"extension/modification";i:16;s:16:"extension/module";i:17;s:16:"feed/google_base";i:18;s:19:"feed/google_sitemap";i:19;s:14:"front/category";i:20;s:12:"front/filter";i:21;s:17:"front/information";i:22;s:10:"front/post";i:23;s:12:"front/review";i:24;s:20:"localisation/country";i:25;s:21:"localisation/currency";i:26;s:21:"localisation/geo_zone";i:27;s:21:"localisation/language";i:28;s:25:"localisation/length_class";i:29;s:21:"localisation/location";i:30;s:25:"localisation/order_status";i:31;s:26:"localisation/return_action";i:32;s:26:"localisation/return_reason";i:33;s:26:"localisation/return_status";i:34;s:25:"localisation/stock_status";i:35;s:22:"localisation/tax_class";i:36;s:21:"localisation/tax_rate";i:37;s:25:"localisation/weight_class";i:38;s:17:"localisation/zone";i:39;s:19:"marketing/affiliate";i:40;s:17:"marketing/contact";i:41;s:16:"marketing/coupon";i:42;s:19:"marketing/marketing";i:43;s:14:"module/account";i:44;s:13:"module/banner";i:45;s:15:"module/carousel";i:46;s:15:"module/category";i:47;s:15:"module/featured";i:48;s:13:"module/filter";i:49;s:22:"module/google_hangouts";i:50;s:11:"module/html";i:51;s:18:"module/information";i:52;s:13:"module/latest";i:53;s:16:"module/slideshow";i:54;s:24:"report/customer_activity";i:55;s:22:"report/customer_credit";i:56;s:21:"report/customer_login";i:57;s:22:"report/customer_online";i:58;s:21:"report/customer_order";i:59;s:22:"report/customer_reward";i:60;s:16:"report/marketing";i:61;s:21:"report/product_viewed";i:62;s:17:"sale/custom_field";i:63;s:13:"sale/customer";i:64;s:20:"sale/customer_ban_ip";i:65;s:19:"sale/customer_group";i:66;s:15:"setting/setting";i:67;s:13:"setting/store";i:68;s:11:"tool/backup";i:69;s:14:"tool/error_log";i:70;s:11:"tool/upload";i:71;s:8:"user/api";i:72;s:9:"user/user";i:73;s:20:"user/user_permission";i:74;s:13:"module/latest";}}'),
+(1, 'Administrator', 'a:2:{s:6:"access";a:47:{i:0;s:18:"common/column_left";i:1;s:18:"common/filemanager";i:2;s:11:"common/menu";i:3;s:14:"common/profile";i:4;s:18:"dashboard/activity";i:5;s:15:"dashboard/chart";i:6;s:16:"dashboard/online";i:7;s:16:"dashboard/recent";i:8;s:13:"design/banner";i:9;s:13:"design/layout";i:10;s:14:"extension/feed";i:11;s:19:"extension/installer";i:12;s:22:"extension/modification";i:13;s:16:"extension/module";i:14;s:16:"feed/google_base";i:15;s:19:"feed/google_sitemap";i:16;s:14:"front/category";i:17;s:12:"front/filter";i:18;s:17:"front/information";i:19;s:10:"front/post";i:20;s:20:"localisation/country";i:21;s:21:"localisation/language";i:22;s:21:"localisation/location";i:23;s:19:"marketing/affiliate";i:24;s:17:"marketing/contact";i:25;s:16:"marketing/coupon";i:26;s:19:"marketing/marketing";i:27;s:13:"module/banner";i:28;s:15:"module/carousel";i:29;s:15:"module/category";i:30;s:24:"module/facebook_comments";i:31;s:15:"module/featured";i:32;s:13:"module/filter";i:33;s:22:"module/google_hangouts";i:34;s:11:"module/html";i:35;s:18:"module/information";i:36;s:13:"module/latest";i:37;s:16:"module/slideshow";i:38;s:16:"report/marketing";i:39;s:18:"report/post_viewed";i:40;s:15:"setting/setting";i:41;s:11:"tool/backup";i:42;s:14:"tool/error_log";i:43;s:11:"tool/upload";i:44;s:8:"user/api";i:45;s:9:"user/user";i:46;s:20:"user/user_permission";}s:6:"modify";a:47:{i:0;s:18:"common/column_left";i:1;s:18:"common/filemanager";i:2;s:11:"common/menu";i:3;s:14:"common/profile";i:4;s:18:"dashboard/activity";i:5;s:15:"dashboard/chart";i:6;s:16:"dashboard/online";i:7;s:16:"dashboard/recent";i:8;s:13:"design/banner";i:9;s:13:"design/layout";i:10;s:14:"extension/feed";i:11;s:19:"extension/installer";i:12;s:22:"extension/modification";i:13;s:16:"extension/module";i:14;s:16:"feed/google_base";i:15;s:19:"feed/google_sitemap";i:16;s:14:"front/category";i:17;s:12:"front/filter";i:18;s:17:"front/information";i:19;s:10:"front/post";i:20;s:20:"localisation/country";i:21;s:21:"localisation/language";i:22;s:21:"localisation/location";i:23;s:19:"marketing/affiliate";i:24;s:17:"marketing/contact";i:25;s:16:"marketing/coupon";i:26;s:19:"marketing/marketing";i:27;s:13:"module/banner";i:28;s:15:"module/carousel";i:29;s:15:"module/category";i:30;s:24:"module/facebook_comments";i:31;s:15:"module/featured";i:32;s:13:"module/filter";i:33;s:22:"module/google_hangouts";i:34;s:11:"module/html";i:35;s:18:"module/information";i:36;s:13:"module/latest";i:37;s:16:"module/slideshow";i:38;s:16:"report/marketing";i:39;s:18:"report/post_viewed";i:40;s:15:"setting/setting";i:41;s:11:"tool/backup";i:42;s:14:"tool/error_log";i:43;s:11:"tool/upload";i:44;s:8:"user/api";i:45;s:9:"user/user";i:46;s:20:"user/user_permission";}}'),
 (10, 'Demonstration', '');
 
 -- --------------------------------------------------------
@@ -5522,12 +5167,6 @@ INSERT INTO `ds_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 --
 
 --
--- Indexes for table `ds_api`
---
-ALTER TABLE `ds_api`
-  ADD PRIMARY KEY (`api_id`);
-
---
 -- Indexes for table `ds_banner`
 --
 ALTER TABLE `ds_banner`
@@ -5576,19 +5215,6 @@ ALTER TABLE `ds_category_path`
 --
 ALTER TABLE `ds_category_to_layout`
   ADD PRIMARY KEY (`category_id`,`store_id`);
-
---
--- Indexes for table `ds_comment`
---
-ALTER TABLE `ds_comment`
-  ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `product_id` (`post_id`);
-
---
--- Indexes for table `ds_country`
---
-ALTER TABLE `ds_country`
-  ADD PRIMARY KEY (`country_id`);
 
 --
 -- Indexes for table `ds_event`
@@ -5674,12 +5300,6 @@ ALTER TABLE `ds_layout_module`
 --
 ALTER TABLE `ds_layout_route`
   ADD PRIMARY KEY (`layout_route_id`);
-
---
--- Indexes for table `ds_likes`
---
-ALTER TABLE `ds_likes`
-  ADD PRIMARY KEY (`like_id`);
 
 --
 -- Indexes for table `ds_marketing`
@@ -5792,11 +5412,6 @@ ALTER TABLE `ds_zone_to_geo_zone`
 --
 
 --
--- AUTO_INCREMENT for table `ds_api`
---
-ALTER TABLE `ds_api`
-  MODIFY `api_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT for table `ds_banner`
 --
 ALTER TABLE `ds_banner`
@@ -5812,16 +5427,6 @@ ALTER TABLE `ds_banner_image`
 ALTER TABLE `ds_category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=60;
 --
--- AUTO_INCREMENT for table `ds_comment`
---
-ALTER TABLE `ds_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `ds_country`
---
-ALTER TABLE `ds_country`
-  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=258;
---
 -- AUTO_INCREMENT for table `ds_event`
 --
 ALTER TABLE `ds_event`
@@ -5830,7 +5435,7 @@ ALTER TABLE `ds_event`
 -- AUTO_INCREMENT for table `ds_extension`
 --
 ALTER TABLE `ds_extension`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=429;
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=430;
 --
 -- AUTO_INCREMENT for table `ds_filter`
 --
@@ -5850,7 +5455,7 @@ ALTER TABLE `ds_information`
 -- AUTO_INCREMENT for table `ds_language`
 --
 ALTER TABLE `ds_language`
-  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ds_layout`
 --
@@ -5860,17 +5465,12 @@ ALTER TABLE `ds_layout`
 -- AUTO_INCREMENT for table `ds_layout_module`
 --
 ALTER TABLE `ds_layout_module`
-  MODIFY `layout_module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=76;
+  MODIFY `layout_module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `ds_layout_route`
 --
 ALTER TABLE `ds_layout_route`
-  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
---
--- AUTO_INCREMENT for table `ds_likes`
---
-ALTER TABLE `ds_likes`
-  MODIFY `like_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `ds_marketing`
 --
@@ -5885,7 +5485,7 @@ ALTER TABLE `ds_modification`
 -- AUTO_INCREMENT for table `ds_module`
 --
 ALTER TABLE `ds_module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `ds_post`
 --
@@ -5895,7 +5495,7 @@ ALTER TABLE `ds_post`
 -- AUTO_INCREMENT for table `ds_setting`
 --
 ALTER TABLE `ds_setting`
-  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=292;
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=512;
 --
 -- AUTO_INCREMENT for table `ds_store`
 --
@@ -5926,6 +5526,3 @@ ALTER TABLE `ds_zone`
 --
 ALTER TABLE `ds_zone_to_geo_zone`
   MODIFY `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=110;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

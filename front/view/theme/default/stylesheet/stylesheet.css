@@ -97,18 +97,22 @@ div.required .control-label:before {
 /* search */
 #search {
 	margin-bottom: 10px;
-	width: 200px
+	width: 200px;
+	background: #601eac;
+	border: 1px solid #999;
+	border-radius: 5px;
 }
 #search .input-lg {
 	height: 40px;
 	line-height: 20px;
-	padding: 0 10px;
+	background: transparent;
+	border:none;
 }
 #search .btn-lg {
 	font-size: 15px;
 	line-height: 18px;
-	padding: 10px 35px;
-	text-shadow: 0 1px 0 #FFF;
+	background: transparent;
+	border:none;
 }
 /* content */
 #content {
@@ -663,8 +667,8 @@ header .vertical-registration-form {
 -----------------------------------------*/
 
 .menu {
-	height: 75px;
 	margin-bottom: 10px;
+	background:#dedede
 }
 
 /* NAV RESETS */
@@ -672,27 +676,15 @@ header .vertical-registration-form {
 	background: inherit;
 }
 
-/* NORMAL NAVIGATION WITH SOCIAL ICON AND LOGO ONLY */
-.non-sticky .navbar-nav.navbar-right:last-child {
-	margin-right: 0;
+/* NAVIGATION */
+.navigation {
+	min-height: 75px;
+	background: #ffffff;
+	border: 0;
+	-webkit-box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
+	box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
 }
 
-.non-sticky .navbar-nav > li > a {
-	font-size: 25px;
-	padding: 0;
-	padding-left: 5px;
-	padding-top: 3px;
-	color: #ffffff;
-}
-.non-sticky .navbar-nav > li > a > i {
-	font-size: 30px;
-}
-
-.non-sticky .navbar-nav > li > a > i:hover {
-	color: #b081e5;
-}
-
-/* STICKY NAVIGATION */
 .sticky-navigation {
 	min-height: 75px;
 	background: #ffffff;
@@ -702,26 +694,20 @@ header .vertical-registration-form {
 	box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
 }
 
-.sticky-navigation .navbar-header {
-	padding-top: 8px;
-}
-
-.sticky-navigation .main-navigation {
+.navigation, .sticky-navigation .main-navigation {
 	padding-top: 13px;
 }
 
-.sticky-navigation .main-navigation .current a {
-	-webkit-backface-visibility: hidden;
-	outline: inherit;
-	position: relative;
-}
-
-.sticky-navigation .navbar-nav > li > a {
+.navbar-nav > li > a {
 	font-family: 'Raleway', sans-serif;
 	font-size: 13px;
 	text-transform: uppercase;
 	font-weight: 600;
 	color: #323232;
+}
+
+.navbar-nav > li > a:hover {
+	color: #5f1dab;
 }
 
 img.featured {
@@ -763,4 +749,11 @@ div.image {
 	background: #428bca;
 	padding: 5px;
 	border: 5px solid #fff;
+}
+
+.fb-box {
+	background: #e9e9e9;
+	border-radius: 5px;
+	padding-top: 10px;
+	box-shadow: 4px 3px 0px #601eac, 9px 8px 0px rgba(0, 0, 0, 0.15);
 }

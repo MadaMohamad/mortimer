@@ -6,9 +6,7 @@ class ModelFrontPost extends Model {
 
 	public function getPost($post_id) {
 		$query = $this->db->query("SELECT DISTINCT *, 
-		pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, 
-		(SELECT COUNT(*) AS total FROM " . DB_PREFIX . "comment c WHERE c.post_id = p.post_id AND c.status = '1' GROUP BY c.post_id) AS comments, 
-		p.sort_order FROM " . DB_PREFIX . "post p 
+		pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, p.sort_order FROM " . DB_PREFIX . "post p 
 		LEFT JOIN " . DB_PREFIX . "post_description pd ON (p.post_id = pd.post_id) 		
 		LEFT JOIN " . DB_PREFIX . "user u ON (p.user_id = u.user_id)
 		 
@@ -32,7 +30,6 @@ class ModelFrontPost extends Model {
 				'user_id'          => $query->row['user_id'],
 				'firstname'        => $query->row['firstname'],
 				'lastname'         => $query->row['lastname'],
-				'comments'         => $query->row['comments'],
 				'user_image'       => $query->row['user_image'],
 				'date_added'       => $query->row['date_added'],
 				'date_modified'    => $query->row['date_modified'],
@@ -44,9 +41,7 @@ class ModelFrontPost extends Model {
 	}
 
 	public function getposts($data = array()) {
-		$sql = "SELECT p.post_id, 
-		(SELECT COUNT(DISTINCT comment_id) AS total FROM " . DB_PREFIX . "comment c WHERE c.post_id = p.post_id AND c.status = '1') AS comments,
-		(SELECT COUNT(DISTINCT like_id) AS total FROM " . DB_PREFIX . "likes l WHERE p.post_id = l.post_id) AS likes";
+		$sql = "SELECT p.post_id ";
 
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {

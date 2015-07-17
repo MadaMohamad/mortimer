@@ -1,26 +1,26 @@
 <?php
-class ControllerCatalogFilter extends Controller {
+class ControllerFrontFilter extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('catalog/filter');
+		$this->load->language('front/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/filter');
+		$this->load->model('front/filter');
 
 		$this->getList();
 	}
 
 	public function add() {
-		$this->load->language('catalog/filter');
+		$this->load->language('front/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/filter');
+		$this->load->model('front/filter');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_filter->addFilter($this->request->post);
+			$this->model_front_filter->addFilter($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,21 +38,21 @@ class ControllerCatalogFilter extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('catalog/filter');
+		$this->load->language('front/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/filter');
+		$this->load->model('front/filter');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_filter->editFilter($this->request->get['filter_group_id'], $this->request->post);
+			$this->model_front_filter->editFilter($this->request->get['filter_group_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,22 +70,22 @@ class ControllerCatalogFilter extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
 	}
 
 	public function delete() {
-		$this->load->language('catalog/filter');
+		$this->load->language('front/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/filter');
+		$this->load->model('front/filter');
 
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $filter_group_id) {
-				$this->model_catalog_filter->deleteFilter($filter_group_id);
+				$this->model_front_filter->deleteFilter($filter_group_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -104,7 +104,7 @@ class ControllerCatalogFilter extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getList();
@@ -152,11 +152,11 @@ class ControllerCatalogFilter extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'href' => $this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL')
 		);
 		
-		$data['add'] = $this->url->link('catalog/filter/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$data['delete'] = $this->url->link('catalog/filter/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['add'] = $this->url->link('front/filter/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['delete'] = $this->url->link('front/filter/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$data['filters'] = array();
 
@@ -167,16 +167,16 @@ class ControllerCatalogFilter extends Controller {
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$filter_total = $this->model_catalog_filter->getTotalFilterGroups();
+		$filter_total = $this->model_front_filter->getTotalFilterGroups();
 
-		$results = $this->model_catalog_filter->getFilterGroups($filter_data);
+		$results = $this->model_front_filter->getFilterGroups($filter_data);
 
 		foreach ($results as $result) {
 			$data['filters'][] = array(
 				'filter_group_id' => $result['filter_group_id'],
 				'name'            => $result['name'],
 				'sort_order'      => $result['sort_order'],
-				'edit'            => $this->url->link('catalog/filter/edit', 'token=' . $this->session->data['token'] . '&filter_group_id=' . $result['filter_group_id'] . $url, 'SSL')
+				'edit'            => $this->url->link('front/filter/edit', 'token=' . $this->session->data['token'] . '&filter_group_id=' . $result['filter_group_id'] . $url, 'SSL')
 			);
 		}
 
@@ -226,8 +226,8 @@ class ControllerCatalogFilter extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . '&sort=fgd.name' . $url, 'SSL');
-		$data['sort_sort_order'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . '&sort=fg.sort_order' . $url, 'SSL');
+		$data['sort_name'] = $this->url->link('front/filter', 'token=' . $this->session->data['token'] . '&sort=fgd.name' . $url, 'SSL');
+		$data['sort_sort_order'] = $this->url->link('front/filter', 'token=' . $this->session->data['token'] . '&sort=fg.sort_order' . $url, 'SSL');
 
 		$url = '';
 
@@ -243,7 +243,7 @@ class ControllerCatalogFilter extends Controller {
 		$pagination->total = $filter_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 
 		$data['pagination'] = $pagination->render();
 
@@ -256,7 +256,7 @@ class ControllerCatalogFilter extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('catalog/filter_list.tpl', $data));
+		$this->response->setOutput($this->load->view('front/filter_list.tpl', $data));
 	}
 
 	protected function getForm() {
@@ -314,19 +314,19 @@ class ControllerCatalogFilter extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'href' => $this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL')
 		);
 		
 		if (!isset($this->request->get['filter_group_id'])) {
-			$data['action'] = $this->url->link('catalog/filter/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$data['action'] = $this->url->link('front/filter/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$data['action'] = $this->url->link('catalog/filter/edit', 'token=' . $this->session->data['token'] . '&filter_group_id=' . $this->request->get['filter_group_id'] . $url, 'SSL');
+			$data['action'] = $this->url->link('front/filter/edit', 'token=' . $this->session->data['token'] . '&filter_group_id=' . $this->request->get['filter_group_id'] . $url, 'SSL');
 		}
 
-		$data['cancel'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['cancel'] = $this->url->link('front/filter', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		if (isset($this->request->get['filter_group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$filter_group_info = $this->model_catalog_filter->getFilterGroup($this->request->get['filter_group_id']);
+			$filter_group_info = $this->model_front_filter->getFilterGroup($this->request->get['filter_group_id']);
 		}
 
 		$data['token'] = $this->session->data['token'];
@@ -338,7 +338,7 @@ class ControllerCatalogFilter extends Controller {
 		if (isset($this->request->post['filter_group_description'])) {
 			$data['filter_group_description'] = $this->request->post['filter_group_description'];
 		} elseif (isset($this->request->get['filter_group_id'])) {
-			$data['filter_group_description'] = $this->model_catalog_filter->getFilterGroupDescriptions($this->request->get['filter_group_id']);
+			$data['filter_group_description'] = $this->model_front_filter->getFilterGroupDescriptions($this->request->get['filter_group_id']);
 		} else {
 			$data['filter_group_description'] = array();
 		}
@@ -354,7 +354,7 @@ class ControllerCatalogFilter extends Controller {
 		if (isset($this->request->post['filter'])) {
 			$data['filters'] = $this->request->post['filter'];
 		} elseif (isset($this->request->get['filter_group_id'])) {
-			$data['filters'] = $this->model_catalog_filter->getFilterDescriptions($this->request->get['filter_group_id']);
+			$data['filters'] = $this->model_front_filter->getFilterDescriptions($this->request->get['filter_group_id']);
 		} else {
 			$data['filters'] = array();
 		}
@@ -363,11 +363,11 @@ class ControllerCatalogFilter extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('catalog/filter_form.tpl', $data));
+		$this->response->setOutput($this->load->view('front/filter_form.tpl', $data));
 	}
 
 	protected function validateForm() {
-		if (!$this->user->hasPermission('modify', 'catalog/filter')) {
+		if (!$this->user->hasPermission('modify', 'front/filter')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
@@ -391,7 +391,7 @@ class ControllerCatalogFilter extends Controller {
 	}
 
 	protected function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'catalog/filter')) {
+		if (!$this->user->hasPermission('modify', 'front/filter')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
@@ -402,7 +402,7 @@ class ControllerCatalogFilter extends Controller {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {
-			$this->load->model('catalog/filter');
+			$this->load->model('front/filter');
 
 			$filter_data = array(
 				'filter_name' => $this->request->get['filter_name'],
@@ -410,7 +410,7 @@ class ControllerCatalogFilter extends Controller {
 				'limit'       => 5
 			);
 
-			$filters = $this->model_catalog_filter->getFilters($filter_data);
+			$filters = $this->model_front_filter->getFilters($filter_data);
 
 			foreach ($filters as $filter) {
 				$json[] = array(

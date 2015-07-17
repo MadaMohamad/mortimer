@@ -57,6 +57,7 @@ class ControllerModuleFeatured extends Controller {
 					'name'        => $post_info['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($post_info['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_post_description_length')) . '..',
 					'user'        => $post_info['user'],
+					'uhref'       => $this->url->link('post/author', 'author_id=' . $post_info['user_id']),
 					'date_added'  => date($this->language->get('date_format_short'), strtotime($post_info['date_added'])),
 					'href'        => $this->url->link('post/post', 'post_id=' . $post_info['post_id'])
 				);

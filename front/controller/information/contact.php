@@ -35,14 +35,11 @@ class ControllerInformationContact extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['text_location'] = $this->language->get('text_location');
-		$data['text_store'] = $this->language->get('text_store');
 		$data['text_contact'] = $this->language->get('text_contact');
 		$data['text_address'] = $this->language->get('text_address');
 		$data['text_telephone'] = $this->language->get('text_telephone');
 		$data['text_fax'] = $this->language->get('text_fax');
-		$data['text_open'] = $this->language->get('text_open');
-		$data['text_comment'] = $this->language->get('text_comment');
+		$data['text_about'] = $this->language->get('text_about');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_email'] = $this->language->get('entry_email');
@@ -87,52 +84,21 @@ class ControllerInformationContact extends Controller {
 			$data['image'] = false;
 		}
 
-		$data['store'] = $this->config->get('config_name');
 		$data['address'] = nl2br($this->config->get('config_address'));
-		$data['geocode'] = $this->config->get('config_geocode');
 		$data['telephone'] = $this->config->get('config_telephone');
 		$data['fax'] = $this->config->get('config_fax');
-		$data['open'] = nl2br($this->config->get('config_open'));
-		$data['comment'] = $this->config->get('config_comment');
-
-		$data['locations'] = array();
-
-		$this->load->model('localisation/location');
-
-		foreach((array)$this->config->get('config_location') as $location_id) {
-			$location_info = $this->model_localisation_location->getLocation($location_id);
-
-			if ($location_info) {
-				if ($location_info['image']) {
-					$image = $this->model_tool_image->resize($location_info['image'], $this->config->get('config_image_location_width'), $this->config->get('config_image_location_height'));
-				} else {
-					$image = false;
-				}
-
-				$data['locations'][] = array(
-					'location_id' => $location_info['location_id'],
-					'name'        => $location_info['name'],
-					'address'     => nl2br($location_info['address']),
-					'geocode'     => $location_info['geocode'],
-					'telephone'   => $location_info['telephone'],
-					'fax'         => $location_info['fax'],
-					'image'       => $image,
-					'open'        => nl2br($location_info['open']),
-					'comment'     => $location_info['comment']
-				);
-			}
-		}
+		$data['about'] = $this->config->get('config_about');
 
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
 		} else {
-			$data['name'] = $this->customer->getFirstName();
+			$data['name'] = '';
 		}
 
 		if (isset($this->request->post['email'])) {
 			$data['email'] = $this->request->post['email'];
 		} else {
-			$data['email'] = $this->customer->getEmail();
+			$data['email'] = '';
 		}
 
 		if (isset($this->request->post['enquiry'])) {
@@ -141,7 +107,7 @@ class ControllerInformationContact extends Controller {
 			$data['enquiry'] = '';
 		}
 
-		if (isset($this->request->post['captcha'])) {
+			if (isset($this->request->post['captcha'])) {
 			$data['captcha'] = $this->request->post['captcha'];
 		} else {
 			$data['captcha'] = '';
