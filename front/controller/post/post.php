@@ -233,7 +233,7 @@ class ControllerPostPost extends Controller {
 					'href'        => $this->url->link('post/post', 'post_id=' . $result['post_id'])
 				);
 			}
-
+			
 			$data['tags'] = array();
 
 			if ($post_info['tag']) {

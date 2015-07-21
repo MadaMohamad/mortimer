@@ -16,11 +16,11 @@
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
       <div class="row">
         <?php if ($column_left && $column_right) { ?>
-        <?php $class = 'col-sm-6'; ?>
+        <?php $class = 'col-sm-7'; ?>
         <?php } elseif ($column_left || $column_right) { ?>
-        <?php $class = 'col-sm-6'; ?>
+        <?php $class = 'col-sm-7'; ?>
         <?php } else { ?>
-        <?php $class = 'col-sm-8'; ?>
+        <?php $class = 'col-sm-9'; ?>
         <?php } ?>
         <div class="<?php echo $class; ?>">
           <?php if ($thumb || $images) { ?>
@@ -40,27 +40,24 @@
           </div>
         </div>
         <?php if ($column_left && $column_right) { ?>
-        <?php $class = 'col-sm-6'; ?>
+        <?php $class = 'col-sm-5'; ?>
         <?php } elseif ($column_left || $column_right) { ?>
-        <?php $class = 'col-sm-6'; ?>
+        <?php $class = 'col-sm-5'; ?>
         <?php } else { ?>
-        <?php $class = 'col-sm-4'; ?>
+        <?php $class = 'col-sm-3'; ?>
         <?php } ?>
-        <div class="<?php echo $class; ?>">
-                <?php if ($posts) { ?>
-      <h3><?php echo $text_related; ?></h3>
-      <div class="row">
-        
-          <div class="post-thumb transition">
-            <div class="image"><a href="<?php echo $post['href']; ?>"><img src="<?php echo $post['thumb']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="img-responsive" /></a></div>
-            <div class="caption">
-              <h4><a href="<?php echo $post['href']; ?>"><?php echo $post['name']; ?></a></h4>
-              <p><?php echo $post['description']; ?></p>
-            </div>
-
+	        <div class="<?php echo $class; ?>">
+	        <?php if ($posts) { ?>
+				<h3><?php echo $text_related; ?></h3>
+				<?php foreach ($posts as $post) { ?>
+	                <div class="image"><a href="<?php echo $post['href']; ?>"><img src="<?php echo $post['thumb']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="img-responsive" /></a></div>
+					<div class="caption">
+						<h4><a href="<?php echo $post['href']; ?>"><?php echo $post['name']; ?></a></h4>
+						<p><?php echo $post['description']; ?></p>
+					</div>
+				<?php } ?>
+	      <?php } ?>
       </div>
-      <?php } ?>
-        </div>
       </div>
 
       <?php if ($tags) { ?>

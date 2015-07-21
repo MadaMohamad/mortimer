@@ -199,6 +199,27 @@ class ModelFrontPost extends Model {
 		foreach ($query->rows as $result) {
 			$post_data[$result['related_id']] = $this->getpost($result['related_id']);
 		}
+		
+		$max_related = 3;
+					
+		$num_related = $max_related - count($post_data);
+			if($num_related > 0) {    
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "post_to_category p2c LEFT JOIN " . DB_PREFIX . "post p ON (p2c.post_id = p.post_id) WHERE p2c.category_id IN (SELECT category_id FROM " . DB_PREFIX . "post_to_category WHERE post_id = '" . (int)$post_id . "') AND p.post_id != '" . (int)$post_id . "' AND p.status = '1' ORDER BY RAND() LIMIT 0," . $num_related); 
+						
+				foreach ($query->rows as $result) { 
+					$post_data[$result['post_id']] = $this->getpost($result['post_id']);
+				}
+			}
+		
+		$num_related = $max_related - count($post_data);
+			if($num_related > 0) {	
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "post WHERE user_id = (SELECT user_id FROM " . DB_PREFIX . "post WHERE post_id = '" . (int)$post_id . "') AND post_id != '" . (int)$post_id . "' AND status = '1' ORDER BY RAND() LIMIT 0," . $num_related); 
+						
+				foreach ($query->rows as $result)
+					$post_data[$result['post_id']] = $this->getpost($result['post_id']);  
+				
+				return $post_data;
+			}
 
 		return $post_data;
 	}
