@@ -3,12 +3,6 @@ class ControllerModuleFacebookComments extends Controller {
 	public function index($setting) {
 		$this->load->language('module/facebook_comments');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/stylesheet/facebook_comments.css')) {
-			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/facebook_comments.css');
-		} else {
-			$this->document->addStyle('catalog/view/theme/default/stylesheet/facebook_comments.css');
-		}
-		
       	$data['heading_title'] = $this->language->get('heading_title');
 		
 		// add fb tag for APP ID if Facebook Open Graph Meta Tags extension is installed
@@ -41,10 +35,10 @@ class ControllerModuleFacebookComments extends Controller {
 		
 		if ($route == 'common/home') {
 			$url = $this->url->link('common/home');
-		} elseif ($route == 'product/product' && isset($this->request->get['product_id'])) {
-			$url = $this->url->link('product/product', 'product_id=' . $this->request->get['product_id']);
-		} elseif ($route == 'product/category' && isset($this->request->get['path'])) {
-			$url = $this->url->link('product/category', 'path=' . $this->request->get['path']);
+		} elseif ($route == 'post/post' && isset($this->request->get['post_id'])) {
+			$url = $this->url->link('post/post', 'post_id=' . $this->request->get['post_id']);
+		} elseif ($route == 'post/category' && isset($this->request->get['path'])) {
+			$url = $this->url->link('post/category', 'path=' . $this->request->get['path']);
 		} elseif ($route == 'information/information' && isset($this->request->get['information_id'])) {
 			$url = $this->url->link('information/information', 'information_id=' . $this->request->get['information_id']);
 		} else {

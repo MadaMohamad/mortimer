@@ -181,20 +181,15 @@ class ControllerPostPost extends Controller {
 			$this->document->addLink($this->url->link('post/post', 'post_id=' . $this->request->get['post_id']), 'canonical');
 			$this->document->addScript('front/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
 			$this->document->addStyle('front/view/javascript/jquery/magnific/magnific-popup.css');
-			$this->document->addStyle('front/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
 			$data['heading_title'] = $post_info['name'];
-
-			$data['text_select'] = $this->language->get('text_select');
-			$data['text_write'] = $this->language->get('text_write');
-			$data['text_note'] = $this->language->get('text_note');
+			
+			$data['text_by'] = $this->language->get('text_by');
+			$data['text_on'] = $this->language->get('text_on');
+			$data['text_author'] = $this->language->get('text_author');
 			$data['text_tags'] = $this->language->get('text_tags');
 			$data['text_related'] = $this->language->get('text_related');
-
-			$data['button_continue'] = $this->language->get('button_continue');
-
-			$data['tab_description'] = $this->language->get('tab_description');
-
+			$data['text_categories'] = $this->language->get('text_category');
 			$data['post_id'] = (int)$this->request->get['post_id'];
 
 			$this->load->model('tool/image');
@@ -210,19 +205,52 @@ class ControllerPostPost extends Controller {
 			} else {
 				$data['thumb'] = '';
 			}
+			
+			$data['categories'] = array();
+			
+			$categories = $this->model_front_post->getCategories($post_info['post_id']);
 
+			foreach ($categories as $category) {
+				$category_details = $this->model_front_category->getCategory($category['category_id']);
+				
+					$data['categories'][] = array(
+						'category_id' => $category_details['category_id'],
+						'name'        => $category_details['name'],
+						'href' 		  => $this->url->link('post/category', 'path=' . $category_details['category_id'])
+						);
+			}
+			
+			$data['display'] = $post_info['display'];
 			$data['description'] = html_entity_decode($post_info['description'], ENT_QUOTES, 'UTF-8');
 			$data['user'] = $post_info['user'];
-			$data['author'] = $this->url->link('post/author', 'author_id=' . $post_info['user_id']);
+			$data['uhref'] = $this->url->link('post/author', 'author_id=' . $post_info['user_id']);
+			$data['user_image'] = $this->model_tool_image->resize($post_info['user_image'], 75, 75);
 			$data['posts'] = array();
+			
+			// Related posts
 			$results = $this->model_front_post->getpostRelated($this->request->get['post_id']);
-
+			$n = 0;
+			$data['post_categories'] = array();
+			
 			foreach ($results as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
 				} else {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
 				}
+				
+				$post_categories = $this->model_front_post->getCategories($result['post_id']);
+				
+					foreach ($post_categories as $post_category) {
+						$post_category_details = $this->model_front_category->getCategory($post_category['category_id']);
+						
+							$data['post_categories'][$n][] = array(
+								'category_id' => $post_category_details['category_id'],
+								'name'        => $post_category_details['name'],
+								'href' 		  => $this->url->link('post/category', 'path=' . $post_category_details['category_id'])
+							);
+						
+					}
 
 				$data['posts'][] = array(
 					'post_id'     => $result['post_id'],
@@ -230,10 +258,15 @@ class ControllerPostPost extends Controller {
 					'name'        => $result['name'],
 					'author'      => $this->url->link('post/author', 'author_id=' . $result['user_id']),
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_post_description_length')) . '..',
+					'user'        => $result['user'],
+					'uhref'       => $this->url->link('post/author', 'author_id=' . $result['user_id']),
+					'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'href'        => $this->url->link('post/post', 'post_id=' . $result['post_id'])
 				);
+				
+				$n++;
 			}
-			
+			// related posts />
 			$data['tags'] = array();
 
 			if ($post_info['tag']) {

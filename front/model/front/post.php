@@ -6,10 +6,9 @@ class ModelFrontPost extends Model {
 
 	public function getPost($post_id) {
 		$query = $this->db->query("SELECT DISTINCT *, 
-		pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, p.sort_order FROM " . DB_PREFIX . "post p 
+		 p.display, pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, p.sort_order FROM " . DB_PREFIX . "post p 
 		LEFT JOIN " . DB_PREFIX . "post_description pd ON (p.post_id = pd.post_id) 		
-		LEFT JOIN " . DB_PREFIX . "user u ON (p.user_id = u.user_id)
-		 
+		LEFT JOIN " . DB_PREFIX . "user u ON (p.user_id = u.user_id) 		 
 		WHERE p.post_id = '" . (int)$post_id . "' 
 		AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' 
 		AND p.status = '1'");
@@ -17,6 +16,7 @@ class ModelFrontPost extends Model {
 		if ($query->num_rows) {
 			return array(
 				'post_id'          => $query->row['post_id'],
+				'display'          => $query->row['display'],
 				'name'             => $query->row['name'],
 				'description'      => $query->row['description'],
 				'meta_title'       => $query->row['meta_title'],

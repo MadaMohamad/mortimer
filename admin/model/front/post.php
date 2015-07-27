@@ -3,7 +3,7 @@ class ModelFrontPost extends Model {
 	public function addpost($data) {
 		$this->event->trigger('pre.admin.post.add', $data);
 
-		$this->db->query("INSERT INTO " . DB_PREFIX . "post SET status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "post SET status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', user_id = '" . $this->user->getId() . "', date_added = NOW()");
 
 		$post_id = $this->db->getLastId();
 
