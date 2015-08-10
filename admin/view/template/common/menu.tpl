@@ -5,7 +5,6 @@
       <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
       <li><a href="<?php echo $post; ?>"><?php echo $text_post; ?></a></li>
       <li><a href="<?php echo $filter; ?>"><?php echo $text_filter; ?></a></li>
-            <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
       <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
     </ul>
   </li>
@@ -15,12 +14,6 @@
       <li><a href="<?php echo $modification; ?>"><?php echo $text_modification; ?></a></li>
       <li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>
       <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
-    </ul>
-  </li>
-  <li id="sale"><a class="parent"><i class="fa fa-shopping-cart fa-fw"></i> <span><?php echo $text_customer; ?></span></a>
-    <ul>
-      <li><a href="<?php echo $customer; ?>"><?php echo $text_customer; ?></a></li>
-      <li><a href="<?php echo $customer_ban_ip; ?>"><?php echo $text_customer_ban_ip; ?></a></li>
     </ul>
   </li>
   <li><a class="parent"><i class="fa fa-share-alt fa-fw"></i> <span><?php echo $text_marketing; ?></span></a>

@@ -14,7 +14,7 @@
 	        <?php } ?>
         <?php } ?>
         <p><?php echo $post['description']; ?></p>
-        <p><i><?php echo $text_author;?> <a href="<?php echo $post['uhref']; ?>"><?php echo $post['user']; ?></a> <?php echo $text_on . ' ' . $post['date_added']; ?></i></p>
+        <p><i><?php echo $text_author;?> <a href="<?php echo $post['uhref']; ?>"><?php echo $post['user']; ?></a> <?php echo $text_on; ?> <a href="<?php echo $post['dhref']; ?>"><?php echo $post['date_added']; ?></a></i></p>
       </div>
     </div>
   </div>

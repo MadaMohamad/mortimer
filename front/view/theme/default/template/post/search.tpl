@@ -18,9 +18,27 @@
       <label class="control-label" for="input-search"><?php echo $entry_search; ?></label>
       <div class="row">
         <div class="col-sm-4">
-          <input type="text" name="search" value="<?php echo $search; ?>" placeholder="<?php echo $text_keyword; ?>" id="input-search" class="form-control" />
+          <input type="text" name="search" value="<?php echo $search; ?>" placeholder="<?php echo $text_keyword; ?>" id="input-search" class="form-control" data-toggle="tooltip" title="<?php echo $text_keyword; ?>"/>
         </div>
-        <div class="col-sm-3">
+        
+        <div class="col-sm-2">
+          
+          
+                <div class="input-group" data-toggle="tooltip" title="<?php echo $text_date; ?>"><input type="text" name="date" value="<?php echo $date; ?>" data-date-format="YYYY-MM-DD" id="date" class="form-control date" />
+                <span class="input-group-btn">
+                	<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                </span>
+                </div>
+        </div>
+        
+        <div class="col-sm-2">
+          
+          
+                <input type="text" name="author" value="<?php echo $author; ?>" placeholder="<?php echo $text_author; ?>" id="input-author" class="form-control" data-toggle="tooltip" title="<?php echo $text_author; ?>" />
+        </div>
+            
+        
+        <div class="col-sm-2">
           <select name="category_id" class="form-control">
             <option value="0"><?php echo $text_category; ?></option>
             <?php foreach ($categories as $category_1) { ?>
@@ -46,7 +64,7 @@
             <?php } ?>
           </select>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <label class="checkbox-inline">
             <?php if ($sub_category) { ?>
             <input type="checkbox" name="sub_category" value="1" checked="checked" />
@@ -113,12 +131,9 @@
             <div class="caption">
               <h4><a href="<?php echo $post['href']; ?>"><?php echo $post['name']; ?></a></h4>
               <p><?php echo $post['description']; ?></p>
+                <p><i><?php echo $text_author;?> <a href="<?php echo $post['uhref']; ?>"><?php echo $post['user']; ?></a> <?php echo $text_on . ' ' . $post['date_added']; ?></i></p>    
              
-              <div class="rating">
-                <i class="fa fa-thumbs-up"></i> <?php echo $post['likes']; ?>
-                <i class="fa fa-comments"></i> <?php echo $post['comments']; ?>
-            </div>
-          </div>
+            </div></div>
         </div>
         <?php } ?>
       </div>
@@ -141,7 +156,19 @@ $('#button-search').bind('click', function() {
 	if (search) {
 		url += '&search=' + encodeURIComponent(search);
 	}
-
+	
+	var date = $('.date').prop('value');
+	
+	if (date) {
+		url += '&date=' + encodeURIComponent(date);
+	}
+	
+	var author = $('#content input[name=\'author\']').prop('value');
+	
+	if (author) {
+		url += '&author=' + encodeURIComponent(author);
+	}
+	
 	var category_id = $('#content select[name=\'category_id\']').prop('value');
 	
 	if (category_id > 0) {
@@ -169,6 +196,12 @@ $('#content input[name=\'search\']').bind('keydown', function(e) {
 	}
 });
 
+$('#content input[name=\'author\']').bind('keydown', function(e) {
+	if (e.keyCode == 13) {
+		$('#button-author').trigger('click');
+	}
+});
+
 $('select[name=\'category_id\']').on('change', function() {
 	if (this.value == '0') {
 		$('input[name=\'sub_category\']').prop('disabled', true);
@@ -179,4 +212,10 @@ $('select[name=\'category_id\']').on('change', function() {
 
 $('select[name=\'category_id\']').trigger('change');
 --></script> 
+
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	pickTime: false
+});
+</script>
 <?php echo $footer; ?> 

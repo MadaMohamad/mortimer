@@ -1,9 +1,10 @@
 <?php
 class ControllerInformationInformation extends Controller {
 	public function index() {
+		
 		$this->load->language('information/information');
 
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		$data['breadcrumbs'] = array();
 
@@ -18,7 +19,7 @@ class ControllerInformationInformation extends Controller {
 			$information_id = 0;
 		}
 
-		$information_info = $this->model_catalog_information->getInformation($information_id);
+		$information_info = $this->model_front_information->getInformation($information_id);
 
 		if ($information_info) {
 			$this->document->setTitle($information_info['meta_title']);
@@ -37,8 +38,7 @@ class ControllerInformationInformation extends Controller {
 			$data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 
 			$data['continue'] = $this->url->link('common/home');
-
-			$data['column_left'] = $this->load->controller('common/column_left');
+ 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
@@ -84,7 +84,7 @@ class ControllerInformationInformation extends Controller {
 	}
 
 	public function agree() {
-		$this->load->model('catalog/information');
+		$this->load->model('front/information');
 
 		if (isset($this->request->get['information_id'])) {
 			$information_id = (int)$this->request->get['information_id'];
@@ -94,7 +94,7 @@ class ControllerInformationInformation extends Controller {
 
 		$output = '';
 
-		$information_info = $this->model_catalog_information->getInformation($information_id);
+		$information_info = $this->model_front_information->getInformation($information_id);
 
 		if ($information_info) {
 			$output .= html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8') . "\n";

@@ -64,7 +64,7 @@ class ControllerFeedGoogleBase extends Controller {
 			$data['google_base_status'] = $this->config->get('google_base_status');
 		}
 
-		$data['data_feed'] = HTTP_CATALOG . 'index.php?route=feed/google_base';
+		$data['data_feed'] = HTTP_FRONT . 'index.php?route=feed/google_base';
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

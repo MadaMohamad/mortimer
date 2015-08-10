@@ -7,7 +7,7 @@ body {
 	background: #454545;
 }
 h1, h2, h3, h4, h5, h6 {
-	color: #444;
+	text-transform: uppercase;
 }
 /* default font size */
 .fa {
@@ -24,24 +24,23 @@ strong {
 /* Override the bootstrap defaults */
 h1 {
 	font-size: 33px;
-	text-transform: uppercase;
 	color: #23a1d1;
 	text-shadow: 4px 3px 0px #601eac, 9px 8px 0px rgba(0, 0, 0, 0.15);
 }
 h2 {
 	font-size: 27px;
+	color: #ffffff;
+	text-shadow: 4px 3px 0px #23a1d1, 9px 8px 0px rgba(0, 0, 0, 0.15);
 }
 h3 {
-	font-size: 25px;
+	font-size: 24px;
 	color:#FFF;
-	text-transform: uppercase;
 	text-shadow: 4px 3px 0px #601eac, 9px 8px 0px rgba(0, 0, 0, 0.15);
 }
 
 h4 {
 	font-size: 15px;
-	text-align: center;
-	text-transform: uppercase;
+	color: #23a1d1;
 }
 
 h5 {
@@ -87,32 +86,28 @@ span.hidden-xs, span.hidden-sm, span.hidden-md, span.hidden-lg {
 	display: inline;
 }
 
-.nav-tabs {
-	margin-bottom: 15px;
-}
-div.required .control-label:before {
-	content: '* ';
-	color: #F00;
-	font-weight: bold;
-}
 /* Gradent to all drop down menus */
+
+.dropdown-menu li > a {
+	padding: 15px;
+	color: #999;
+}
+
 .dropdown-menu li > a:hover {
 	text-decoration: none;
 	color: #ffffff;
 	background-color: #229ac8;
-	background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
-	background-repeat: repeat-x;
 }
 /* search */
 #search {
-	margin-bottom: 10px;
 	width: 200px;
 	background: #601eac;
 	border: 1px solid #999;
 	border-radius: 5px;
+	margin: 8px 0px 0px 15px;
 }
 #search .input-lg {
-	height: 40px;
+	height: 34px;
 	line-height: 20px;
 	background: transparent;
 	border:none;
@@ -157,10 +152,7 @@ footer h5 {
 /* breadcrumb */
 .breadcrumb {
 	margin: 0 0 20px 0;
-	padding: 8px 0;
-	border: 1px solid #ddd;
-	background: #23a1d1;
-	
+	padding: 8px 0;	
 }
 .breadcrumb i {
 	font-size: 15px;
@@ -200,12 +192,23 @@ footer h5 {
 	margin: 1em 0;
 }
 .btn {
+	background: #601eac;
 	padding: 7.5px 12px;
 	font-size: 12px;
-	border: 1px solid #cccccc;
+	color: #9c9c9c;
+	border: 1px solid #9c9c9c;
 	border-radius: 4px;
-	box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+	transition: 1s all;
 }
+
+#language{margin: 8px 0px 0px 15px}
+.language{height: 36px;}
+.language:hover{text-decoration: none;}
+.btn:hover {color: #fff;background: #23a1d1;
+}
+
+.btn .fa {color: #9c9c9c;}
+
 .btn-xs {
 	font-size: 9px;
 }
@@ -213,7 +216,7 @@ footer h5 {
 	font-size: 10.2px;
 }
 .btn-lg {
-	padding: 10px 16px;
+	padding: 8px 16px;
 	font-size: 15px;
 }
 .btn-group > .btn, .btn-group > .dropdown-menu, .btn-group > .popover {
@@ -229,12 +232,12 @@ footer h5 {
 	font-size: 15px;
 }
 .btn-default {
-	color: #777;
+	color: #fff;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	background-color: #e7e7e7;
-	background-image: linear-gradient(to bottom, #eeeeee, #dddddd);
+	background-image: linear-gradient(to bottom, #601eac, #337ab7);
 	background-repeat: repeat-x;
-	border-color: #dddddd #dddddd #b3b3b3 #b7b7b7;
+	border-color: #337ab7;
 }
 .btn-primary {
 	color: #ffffff;
@@ -334,7 +337,7 @@ img.author {
 }
 }
 .post-thumb h4 {
-	font-weight: bold;
+	text-align: center;
 }
 .post-thumb .caption {
 	padding: 0 20px;
@@ -453,10 +456,11 @@ header#home {
 	background: url('../image/bg-image-1.jpg') no-repeat center top fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
-	text-align: center;
 	min-height: 500px;
 }
-
+header#home div {
+	text-align: center;
+}
 header .vertical-registration-form {
 	margin-top: 60px;
 }
@@ -464,6 +468,8 @@ header .vertical-registration-form {
 .navigation-header {
 	padding-top: 47px;
 	padding-bottom: 30px;
+		margin-bottom: 10px;
+
 }
 
 .intro-section {
@@ -532,7 +538,7 @@ header .vertical-registration-form {
 	box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
 }
 
-.navigation, .sticky-navigation .main-navigation {
+.navigation {
 	padding-top: 13px;
 }
 
@@ -569,9 +575,9 @@ div.image {
 .ltittle {
 	text-align: left;
 }
-.latest {
-	min-height: 156px;
-	padding-bottom: 10px;
+.platest {
+	margin-bottom: 10px;
+	min-height: 160px;
 }
 .author-image {
 	list-style: none;

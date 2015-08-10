@@ -55,6 +55,7 @@ class ControllerModuleLatest extends Controller {
 					'user'        => $result['user'],
 					'uhref'       => $this->url->link('post/author', 'author_id=' . $result['user_id']),
 					'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+					'dhref'       => $this->url->link('post/search', 'date=' . date("Y-m-d",  strtotime($result['date_added']))),
 					'href'        => $this->url->link('post/post', 'post_id=' . $result['post_id']),
 				);
 				

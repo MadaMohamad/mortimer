@@ -9,9 +9,9 @@ class ControllerModuleFilter extends Controller {
 
 		$category_id = end($parts);
 
-		$this->load->model('catalog/category');
+		$this->load->model('front/category');
 
-		$category_info = $this->model_catalog_category->getCategory($category_id);
+		$category_info = $this->model_front_category->getCategory($category_id);
 
 		if ($category_info) {
 			$this->load->language('module/filter');
@@ -34,7 +34,7 @@ class ControllerModuleFilter extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
-			$data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url));
+			$data['action'] = str_replace('&amp;', '&', $this->url->link('post/category', 'path=' . $this->request->get['path'] . $url));
 
 			if (isset($this->request->get['filter'])) {
 				$data['filter_category'] = explode(',', $this->request->get['filter']);
@@ -42,11 +42,11 @@ class ControllerModuleFilter extends Controller {
 				$data['filter_category'] = array();
 			}
 
-			$this->load->model('catalog/product');
+			$this->load->model('front/post');
 
 			$data['filter_groups'] = array();
 
-			$filter_groups = $this->model_catalog_category->getCategoryFilters($category_id);
+			$filter_groups = $this->model_front_category->getCategoryFilters($category_id);
 
 			if ($filter_groups) {
 				foreach ($filter_groups as $filter_group) {
@@ -60,7 +60,7 @@ class ControllerModuleFilter extends Controller {
 
 						$childen_data[] = array(
 							'filter_id' => $filter['filter_id'],
-							'name'      => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : '')
+							'name'      => $filter['name'] . ($this->config->get('config_post_count') ? ' (' . $this->model_front_post->getTotalposts($filter_data) . ')' : '')
 						);
 					}
 

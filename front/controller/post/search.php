@@ -14,7 +14,19 @@ class ControllerPostSearch extends Controller {
 		} else {
 			$search = '';
 		}
-
+				
+		if (isset($this->request->get['date'])) {
+			$date = $this->request->get['date'];
+		} else {
+			$date = '';
+		}
+		
+		if (isset($this->request->get['author'])) {
+			$author = $this->request->get['author'];
+		} else {
+			$author = '';
+		}
+		
 		if (isset($this->request->get['tag'])) {
 			$tag = $this->request->get['tag'];
 		} elseif (isset($this->request->get['search'])) {
@@ -79,13 +91,26 @@ class ControllerPostSearch extends Controller {
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
 		);
-
+		
+		
+		$this->document->addScript('front/view/javascript/jquery/datetimepicker/moment.js');
+		$this->document->addScript('front/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
+		$this->document->addStyle('front/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+		
 		$url = '';
 
 		if (isset($this->request->get['search'])) {
 			$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['date'])) {
+			$url .= '&date=' . $this->request->get['date'];
+		}
+		
+		if (isset($this->request->get['author'])) {
+			$url .= '&author=' . urlencode(html_entity_decode($this->request->get['author'], ENT_QUOTES, 'UTF-8'));
+		}
+		
 		if (isset($this->request->get['tag'])) {
 			$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -128,15 +153,19 @@ class ControllerPostSearch extends Controller {
 		} else {
 			$data['heading_title'] = $this->language->get('heading_title');
 		}
-
+		
 		$data['text_empty'] = $this->language->get('text_empty');
+		$data['text_date'] = $this->language->get('text_date');
 		$data['text_search'] = $this->language->get('text_search');
 		$data['text_keyword'] = $this->language->get('text_keyword');
 		$data['text_category'] = $this->language->get('text_category');
 		$data['text_sub_category'] = $this->language->get('text_sub_category');
 		$data['text_sort'] = $this->language->get('text_sort');
 		$data['text_limit'] = $this->language->get('text_limit');
-
+		$data['text_author'] = $this->language->get('text_author');
+		$data['text_on'] = $this->language->get('text_on');
+		
+		$data['entry_author'] = $this->language->get('entry_author');
 		$data['entry_search'] = $this->language->get('entry_search');
 		$data['entry_description'] = $this->language->get('entry_description');
 
@@ -184,9 +213,11 @@ class ControllerPostSearch extends Controller {
 
 		$data['posts'] = array();
 
-		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
+		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['date']) || isset($this->request->get['author'])) {
 			$filter_data = array(
 				'filter_name'         => $search,
+				'filter_date'         => $date,
+				'filter_author'       => $author,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
 				'filter_category_id'  => $category_id,
@@ -208,19 +239,14 @@ class ControllerPostSearch extends Controller {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_post_width'), $this->config->get('config_image_post_height'));
 				}
 
-				if ($this->config->get('config_comment_status')) {
-					$likes = (int)$result['likes'];
-				} else {
-					$likes = false;
-				}
-
 				$data['posts'][] = array(
 					'post_id'     => $result['post_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
-					'comments'    => $result['comments'],
-					'likes'       => $result['likes'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_post_description_length')) . '..',
+					'user'        => $result['user'],
+					'uhref'       => $this->url->link('post/author', 'author_id=' . $result['user_id']),
+					'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'href'        => $this->url->link('post/post', 'post_id=' . $result['post_id'] . $url)
 				);
 			}
@@ -229,6 +255,14 @@ class ControllerPostSearch extends Controller {
 
 			if (isset($this->request->get['search'])) {
 				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
+			}
+			
+			if (isset($this->request->get['date'])) {
+				$url .= '&date=' . $this->request->get['date'];
+			}
+			
+			if (isset($this->request->get['author'])) {
+				$url .= '&author=' . urlencode(html_entity_decode($this->request->get['author'], ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['tag'])) {
@@ -270,39 +304,34 @@ class ControllerPostSearch extends Controller {
 				'value' => 'pd.name-DESC',
 				'href'  => $this->url->link('post/search', 'sort=pd.name&order=DESC' . $url)
 			);
-
-			if ($this->config->get('config_comment_status')) {
-				$data['sorts'][] = array(
-					'text'  => $this->language->get('text_likes_desc'),
-					'value' => 'likes-DESC',
-					'href'  => $this->url->link('post/search', 'sort=likes&order=DESC' . $url)
-				);
-
-				$data['sorts'][] = array(
-					'text'  => $this->language->get('text_likes_asc'),
-					'value' => 'likes-ASC',
-					'href'  => $this->url->link('post/search', 'sort=likes&order=ASC' . $url)
-				);
-			}
-
+			
 			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_asc'),
-				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('post/search', 'sort=p.model&order=ASC' . $url)
+				'text'  => $this->language->get('text_date_desc'),
+				'value' => 'pd.date_added-DESC',
+				'href'  => $this->url->link('post/search', '&sort=pd.date&order=DESC' . $url)
+			);
+			
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_date_asc'),
+				'value' => 'pd.date_added-ASC',
+				'href'  => $this->url->link('post/search', '&sort=pd.date&order=ASC' . $url)
 			);
 
-			$data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_desc'),
-				'value' => 'p.model-DESC',
-				'href'  => $this->url->link('post/search', 'sort=p.model&order=DESC' . $url)
-			);
 
 			$url = '';
 
 			if (isset($this->request->get['search'])) {
 				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
-
+			
+			if (isset($this->request->get['date'])) {
+				$url .= '&date=' . $this->request->get['date'];
+			}
+			
+			if (isset($this->request->get['author'])) {
+				$url .= '&author=' . urlencode(html_entity_decode($this->request->get['author'], ENT_QUOTES, 'UTF-8'));
+			}
+			
 			if (isset($this->request->get['tag'])) {
 				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
@@ -329,7 +358,7 @@ class ControllerPostSearch extends Controller {
 
 			$data['limits'] = array();
 
-			$limits = array_unique(array($this->config->get('config_post_limit'), 25, 50, 75, 100));
+			$limits = array_unique(array($this->config->get('config_post_limit'), 20, 30, 50));
 
 			sort($limits);
 
@@ -347,6 +376,14 @@ class ControllerPostSearch extends Controller {
 				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['date'])) {
+				$url .= '&date=' . $this->request->get['date'];
+			}
+			
+			if (isset($this->request->get['author'])) {
+				$url .= '&author=' . urlencode(html_entity_decode($this->request->get['author'], ENT_QUOTES, 'UTF-8'));
+			}
+			
 			if (isset($this->request->get['tag'])) {
 				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
@@ -387,6 +424,8 @@ class ControllerPostSearch extends Controller {
 		}
 
 		$data['search'] = $search;
+		$data['date'] = $date;
+		$data['author'] = $author;
 		$data['description'] = $description;
 		$data['category_id'] = $category_id;
 		$data['sub_category'] = $sub_category;

@@ -36,7 +36,9 @@ class ControllerCommonHome extends Controller {
 
 		$data['text_home'] = $this->language->get('text_home');
 		$data['text_category'] = $this->language->get('text_category');
+		$data['text_contact'] = $this->language->get('text_contact');
 		$data['text_all'] = $this->language->get('text_all');
+		$data['text_search'] = $this->language->get('text_search');
 		$data['home'] = $this->url->link('common/home');
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
@@ -67,6 +69,7 @@ class ControllerCommonHome extends Controller {
 			if ($category['top']) {
 				$data['categories'][] = array(
 					'name'     => $category['name'],
+					'icon'     => $category['icon'],
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('post/category', 'path=' . $category['category_id'])
 				);

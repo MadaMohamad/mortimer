@@ -11,26 +11,15 @@ class ControllerMarketingContact extends Controller {
 
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_newsletter'] = $this->language->get('text_newsletter');
-		$data['text_customer_all'] = $this->language->get('text_customer_all');
-		$data['text_customer'] = $this->language->get('text_customer');
-		$data['text_customer_group'] = $this->language->get('text_customer_group');
-		$data['text_affiliate_all'] = $this->language->get('text_affiliate_all');
-		$data['text_affiliate'] = $this->language->get('text_affiliate');
-		$data['text_product'] = $this->language->get('text_product');
+		$data['text_post'] = $this->language->get('text_post');
 		$data['text_loading'] = $this->language->get('text_loading');
 
-		$data['entry_store'] = $this->language->get('entry_store');
 		$data['entry_to'] = $this->language->get('entry_to');
-		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
-		$data['entry_customer'] = $this->language->get('entry_customer');
-		$data['entry_affiliate'] = $this->language->get('entry_affiliate');
-		$data['entry_product'] = $this->language->get('entry_product');
+		$data['entry_post'] = $this->language->get('entry_post');
 		$data['entry_subject'] = $this->language->get('entry_subject');
 		$data['entry_message'] = $this->language->get('entry_message');
 
-		$data['help_customer'] = $this->language->get('help_customer');
-		$data['help_affiliate'] = $this->language->get('help_affiliate');
-		$data['help_product'] = $this->language->get('help_product');
+		$data['help_post'] = $this->language->get('help_post');
 
 		$data['button_send'] = $this->language->get('button_send');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -50,14 +39,6 @@ class ControllerMarketingContact extends Controller {
 		);
 
 		$data['cancel'] = $this->url->link('marketing/contact', 'token=' . $this->session->data['token'], 'SSL');
-
-		$this->load->model('setting/store');
-
-		$data['stores'] = $this->model_setting_store->getStores();
-
-		$this->load->model('sale/customer_group');
-
-		$data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups(0);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -85,23 +66,6 @@ class ControllerMarketingContact extends Controller {
 			}
 
 			if (!$json) {
-				$this->load->model('setting/store');
-
-				$store_info = $this->model_setting_store->getStore($this->request->post['store_id']);
-
-				if ($store_info) {
-					$store_name = $store_info['name'];
-				} else {
-					$store_name = $this->config->get('config_name');
-				}
-
-				$this->load->model('sale/customer');
-
-				$this->load->model('sale/customer_group');
-
-				$this->load->model('marketing/affiliate');
-
-				$this->load->model('sale/order');
 
 				if (isset($this->request->get['page'])) {
 					$page = $this->request->get['page'];
@@ -194,11 +158,11 @@ class ControllerMarketingContact extends Controller {
 							}
 						}
 						break;
-					case 'product':
-						if (isset($this->request->post['product'])) {
-							$email_total = $this->model_sale_order->getTotalEmailsByProductsOrdered($this->request->post['product']);
+					case 'post':
+						if (isset($this->request->post['post'])) {
+							$email_total = $this->model_sale_order->getTotalEmailsBypostsOrdered($this->request->post['post']);
 
-							$results = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product'], ($page - 1) * 10, 10);
+							$results = $this->model_sale_order->getEmailsBypostsOrdered($this->request->post['post'], ($page - 1) * 10, 10);
 
 							foreach ($results as $result) {
 								$emails[] = $result['email'];

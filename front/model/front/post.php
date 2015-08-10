@@ -6,7 +6,7 @@ class ModelFrontPost extends Model {
 
 	public function getPost($post_id) {
 		$query = $this->db->query("SELECT DISTINCT *, 
-		 p.display, pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, p.sort_order FROM " . DB_PREFIX . "post p 
+		 p.display, pd.name AS name, p.image, u.firstname AS firstname, u.username AS user, u.lastname AS lastname, u.image AS user_image, u.user_id AS user_id, p.sort_order, p.date_added FROM " . DB_PREFIX . "post p 
 		LEFT JOIN " . DB_PREFIX . "post_description pd ON (p.post_id = pd.post_id) 		
 		LEFT JOIN " . DB_PREFIX . "user u ON (p.user_id = u.user_id) 		 
 		WHERE p.post_id = '" . (int)$post_id . "' 
@@ -42,7 +42,7 @@ class ModelFrontPost extends Model {
 
 	public function getposts($data = array()) {
 		$sql = "SELECT p.post_id ";
-
+		
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {
 				$sql .= " FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "post_to_category p2c ON (cp.category_id = p2c.category_id)";
@@ -59,8 +59,15 @@ class ModelFrontPost extends Model {
 			$sql .= " FROM " . DB_PREFIX . "post p";
 		}
 
-		$sql .= " LEFT JOIN " . DB_PREFIX . "post_description pd ON (p.post_id = pd.post_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1'";
+		$sql .= " LEFT JOIN " . DB_PREFIX . "post_description pd ON (p.post_id = pd.post_id) LEFT JOIN " . DB_PREFIX . "user u ON (u.user_id = p.user_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1'";
 
+		if (!empty($data['filter_date'])) {
+				$sql .= " AND p.date_added LIKE '" . $data['filter_date'] . "%'";
+			}
+			
+		if (!empty($data['filter_author'])) { 
+				$sql .= " AND u.username LIKE '%" . $data['filter_author'] . "%'";
+			}
 
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {
@@ -80,8 +87,8 @@ class ModelFrontPost extends Model {
 
 				$sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
 			}
-		}
-
+		}		
+		
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 			$sql .= " AND (";
 
@@ -102,7 +109,9 @@ class ModelFrontPost extends Model {
 					$sql .= " OR pd.description LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 				}
 			}
-
+			
+			
+			
 			if (!empty($data['filter_name']) && !empty($data['filter_tag'])) {
 				$sql .= " OR ";
 			}
@@ -111,15 +120,14 @@ class ModelFrontPost extends Model {
 				$sql .= "pd.tag LIKE '%" . $this->db->escape($data['filter_tag']) . "%'";
 			}
 
+			
 			$sql .= ")";
 		}
-
 
 		$sql .= " GROUP BY p.post_id";
 
 		$sort_data = array(
 			'pd.name',
-			'rating',
 			'p.sort_order',
 			'p.date_added'
 		);

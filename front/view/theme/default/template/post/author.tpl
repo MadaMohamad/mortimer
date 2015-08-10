@@ -27,7 +27,7 @@
             <div class="tab-content">
             <ul class="author-image">
             <?php if ($thumb) { ?>
-            <li><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>"><img class="featured" src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a></li>
+            <li><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>"><img class="featured img-responsive" src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a></li>
             <?php } ?>
           </ul>
 
@@ -53,15 +53,15 @@
           </div>
       </div>
       <?php if ($posts) { ?>
-      <h3><?php echo $text_posts; ?></h3>
+      <h3><?php echo $text_posts; ?> <?php echo $text_by; ?> <?php echo $heading_title; ?></h3>
       <div class="row">
       <?php $n = 0; ?>
         <?php foreach ($posts as $post) { ?>
         
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 latest">
+         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 platest">
   	
     
-    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 image"><a href="<?php echo $post['href']; ?>"><img class="latest" src="<?php echo $post['thumb']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="img-responsive" /></a></div>
+    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-5 image"><a href="<?php echo $post['href']; ?>"><img class="latest img-responsive" src="<?php echo $post['thumb']; ?>" alt="<?php echo $post['name']; ?>" title="<?php echo $post['name']; ?>" class="img-responsive" /></a></div>
 	      <div class="col-lg-8 col-md-8 col-sm-7 col-xs-7">
 		        <h4 class="ltittle"><a href="<?php echo $post['href']; ?>"><?php echo $post['name']; ?></a></h4>
 		        <?php if (!empty($categories_info[$n]) ) { ?>
@@ -71,6 +71,7 @@
 			        <?php } ?>
 		        <?php } ?>
 		        <p><?php echo $post['description']; ?></p>
+		        <p><i><?php echo $text_on; ?> <a href="<?php echo $post['dhref']; ?>"><?php echo $post['date_added']; ?></a></i></p>
 	      </div>
 	</div>
   <?php $n++; ?>
@@ -79,7 +80,7 @@
         <?php } ?>
       </div>
       <?php } ?>
-
+<a href="<?php echo $see_more; ?>" type="button" class="btn btn-primary"><?php echo $text_see_more; ?></a>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>

@@ -36,7 +36,9 @@ class ControllerCommonHeader extends Controller {
 
 		$data['text_home'] = $this->language->get('text_home');
 		$data['text_category'] = $this->language->get('text_category');
+		$data['text_contact'] = $this->language->get('text_contact');
 		$data['text_all'] = $this->language->get('text_all');
+		$data['text_search'] = $this->language->get('text_search');
 		$data['home'] = $this->url->link('common/home');
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
@@ -66,27 +68,10 @@ class ControllerCommonHeader extends Controller {
 
 		foreach ($categories as $category) {
 			if ($category['top']) {
-				// Level 2
-				$children_data = array();
 
-				$children = $this->model_front_category->getCategories($category['category_id']);
-
-				foreach ($children as $child) {
-					$filter_data = array(
-						'filter_category_id'  => $child['category_id'],
-						'filter_sub_category' => true
-					);
-
-					$children_data[] = array(
-						'name'  => $child['name'] . ($this->config->get('config_post_count') ? ' (' . $this->model_front_post->getTotalposts($filter_data) . ')' : ''),
-						'href'  => $this->url->link('post/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
-					);
-				}
-
-				// Level 1
 				$data['categories'][] = array(
 					'name'     => $category['name'],
-					'children' => $children_data,
+					'icon'     => $category['icon'],
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('post/category', 'path=' . $category['category_id'])
 				);

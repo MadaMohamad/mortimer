@@ -220,6 +220,18 @@ class ControllerPostCategory extends Controller {
 				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
 			);
 			
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_date_desc'),
+				'value' => 'pd.date_added-DESC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=pd.date&order=DESC' . $url)
+			);
+			
+			$data['sorts'][] = array(
+				'text'  => $this->language->get('text_date_asc'),
+				'value' => 'pd.date_added-ASC',
+				'href'  => $this->url->link('post/category', 'path=' . $this->request->get['path'] . '&sort=pd.date&order=ASC' . $url)
+			);
+			
 			$url = '';
 
 			if (isset($this->request->get['filter'])) {

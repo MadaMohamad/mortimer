@@ -15,6 +15,9 @@ $_['text_author']           = 'Published by:';
 $_['text_on']               = 'on';
 $_['text_category']         = 'Categories';
 $_['text_posts']            = 'Posts';
+$_['text_by']               = 'By';
+$_['text_contact']          = 'Contact';
+$_['text_see_more']         = 'See More';
 
 // Buttons
 $_['button_back']           = 'Back';
@@ -23,7 +26,6 @@ $_['button_filter']         = 'Refine Search';
 $_['button_search']         = 'Search';
 $_['button_list']           = 'List';
 $_['button_grid']           = 'Grid';
-$_['button_map']            = 'View Google Map';
 
 // Error
 $_['error_exception']       = 'Error Code(%s): %s in %s on line %s';

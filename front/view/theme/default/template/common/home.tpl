@@ -63,30 +63,40 @@
 	<div class="navigation-header">
 		
 		<!-- STICKY NAVIGATION -->
-		<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
+		<div class="navigation navbar-fixed-top sticky-navigation">
 			<div class="container">
 				<div class="navbar-header">
 					
 					<!-- LOGO ON STICKY NAV BAR -->
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#landx-navigation">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><img src="<?php echo $logo; ?>" alt=""></a>
+					<a class="navbar-brand" href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" alt=""></a>
 					
 				</div>
 				
 				<!-- NAVIGATION LINKS -->
-				<div class="navbar-collapse collapse" id="landx-navigation">
+				<div class="navbar-collapse collapse" id="navigation">
 					<ul class="nav navbar-nav navbar-right main-navigation">
-						<li><a href="#home">Home</a></li>
+						<li><a href="<?php echo $home; ?>"><i class="fa fa-home"></i> <?php echo $text_home; ?></a></li>
 						 <?php foreach ($categories as $category) { ?>
-						 <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+							 <li>
+								<a href="<?php echo $category['href']; ?>">
+								<?php if ($category['icon']) { ?><i class="fa <?php echo $category['icon']; ?>"></i><?php } ?>	
+								<?php echo $category['name']; ?></a>
+							 </li>
 						 <?php } ?>
-
-						<li><a href="#section8">Contact</a></li>
+						<li><a href="<?php echo $contact; ?>"><i class="fa fa-envelope"></i> <?php echo $text_contact; ?></a></li>
+						<li><?php echo $language; ?></li>
+						<li><div id="search" class="input-group">
+						<input type="text" name="search" value="" placeholder="<?php echo $text_search; ?>" class="input-lg">
+						<span class="input-group-btn">
+							<button type="button" class="btn-lg"><i class="fa fa-search"></i></button>
+						</span>
+					</div></li>
 					</ul>
 				</div>
 				

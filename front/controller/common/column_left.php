@@ -12,23 +12,23 @@ class ControllerCommonColumnLeft extends Controller {
 		$layout_id = 0;
 
 		if ($route == 'product/category' && isset($this->request->get['path'])) {
-			$this->load->model('catalog/category');
+			$this->load->model('front/category');
 			
 			$path = explode('_', (string)$this->request->get['path']);
 
-			$layout_id = $this->model_catalog_category->getCategoryLayoutId(end($path));
+			$layout_id = $this->model_front_category->getCategoryLayoutId(end($path));
 		}
 
 		if ($route == 'product/product' && isset($this->request->get['product_id'])) {
-			$this->load->model('catalog/product');
+			$this->load->model('front/product');
 			
-			$layout_id = $this->model_catalog_product->getProductLayoutId($this->request->get['product_id']);
+			$layout_id = $this->model_front_product->getProductLayoutId($this->request->get['product_id']);
 		}
 
 		if ($route == 'information/information' && isset($this->request->get['information_id'])) {
-			$this->load->model('catalog/information');
+			$this->load->model('front/information');
 			
-			$layout_id = $this->model_catalog_information->getInformationLayoutId($this->request->get['information_id']);
+			$layout_id = $this->model_front_information->getInformationLayoutId($this->request->get['information_id']);
 		}
 
 		if (!$layout_id) {

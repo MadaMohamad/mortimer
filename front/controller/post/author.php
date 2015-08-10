@@ -17,10 +17,13 @@ class ControllerPostAuthor extends Controller {
 			'href' => $this->url->link('post/author/author_list')
 		);
 		
-		$data['text_name'] = $this->language->get('text_name');
 		$data['text_bio'] = $this->language->get('text_bio');
-		$data['text_posts'] = $this->language->get('text_posts');
+		$data['text_by'] = $this->language->get('text_by');
 		$data['text_category'] = $this->language->get('text_category');
+		$data['text_name'] = $this->language->get('text_name');
+		$data['text_on'] = $this->language->get('text_on');
+		$data['text_posts'] = $this->language->get('text_posts');
+		$data['text_see_more'] = $this->language->get('text_see_more');
 		
 		
 		if (isset($this->request->get['author_id'])) {
@@ -75,7 +78,8 @@ class ControllerPostAuthor extends Controller {
 			
 			$data['name'] = $author_info['firstname'] . " " . $author_info['lastname'];
 			$data['bio'] = html_entity_decode($author_info['bio'], ENT_QUOTES, 'UTF-8');
-
+			$data['see_more'] = $this->url->link('post/search', 'author=' . $author_info['username']);
+			
 			$data['posts'] = array();
 
 			$posts = $this->model_front_author->getPostsByAuthor($this->request->get['author_id']);
@@ -109,6 +113,8 @@ class ControllerPostAuthor extends Controller {
 					'thumb'       => $image,
 					'name'        => $result['name'],
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_post_description_length')) . '..',
+					'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+					'dhref'       => $this->url->link('post/search', 'date=' . date("Y-m-d",  strtotime($result['date_added']))),
 					'href'        => $this->url->link('post/post', 'post_id=' . $result['post_id'])
 				);
 				
