@@ -3,12 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2015 at 12:06 AM
+-- Generation Time: Jun 14, 2016 at 12:22 AM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `mada`
@@ -605,7 +611,7 @@ INSERT INTO `ds_post` (`post_id`, `image`, `sort_order`, `status`, `display`, `v
 (41, 'catalog/Pixel/lilac.png', 0, 1, 0, 20, 1, '2009-02-03 21:07:26', '2015-05-01 09:48:57'),
 (42, 'catalog/Photomanip/open door.png', 0, 1, 0, 7, 1, '2009-02-03 21:07:37', '2015-05-01 09:49:04'),
 (47, 'catalog/Photomanip/Our Universe.png', 0, 1, 0, 100, 1, '2009-02-03 21:08:40', '2015-05-01 09:48:47'),
-(50, 'catalog/vectors/mada-chibi.png', 1, 1, 0, 8, 0, '2015-07-20 17:40:46', '0000-00-00 00:00:00');
+(50, 'catalog/vectors/mada-chibi.png', 1, 1, 0, 9, 0, '2015-07-20 17:40:46', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -5538,3 +5544,6 @@ ALTER TABLE `ds_zone`
 --
 ALTER TABLE `ds_zone_to_geo_zone`
   MODIFY `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=110;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
